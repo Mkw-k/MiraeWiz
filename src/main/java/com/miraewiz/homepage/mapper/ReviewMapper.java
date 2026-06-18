@@ -2,6 +2,7 @@ package com.miraewiz.homepage.mapper;
 
 import com.miraewiz.homepage.model.Review;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 import java.util.List;
 
 @Mapper
@@ -12,5 +13,8 @@ public interface ReviewMapper {
     void insert(Review review);
     void update(Review review);
     void updateVisibility(Long id, Boolean isVisible);
+    void delete(Long id);
+}
+Param("isVisible") Boolean isVisible);
     void delete(Long id);
 }

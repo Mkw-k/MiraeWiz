@@ -27,7 +27,7 @@ public class MainController {
     @GetMapping("/")
     public String index(Model model) {
         model.addAttribute("programs", programMapper.findAllVisible());
-        model.addAttribute("bestReviews", reviewMapper.findAllVisible()); 
+        model.addAttribute("bestReviews", reviewMapper.findAllVisible(0, 3)); 
         model.addAttribute("vision", siteContentMapper.findByKey("ABOUT_VISION"));
         return "index";
     }

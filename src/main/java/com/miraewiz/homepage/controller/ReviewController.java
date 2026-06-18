@@ -45,7 +45,17 @@ public class ReviewController {
             return "redirect:/reviews";
         } else {
             model.addAttribute("error", "비밀번호가 일치하지 않습니다.");
-            model.addAttribute("reviews", reviewMapper.findAllVisible());
+            int limit = 9;
+            int totalReviews = reviewMapper.countVisible();
+            int totalPages = (int) Math.ceil((double) totalReviews / limit);
+            model.addAttribute("reviews", reviewMapper.findAllVisible(0, limit));
+            model.addAttribute("currentPage", 1);
+            model.addAttribute("totalPages", totalPages > 0 ? totalPages : 1);
+            return "reviews";
+        }
+    }
+}
+, reviewMapper.findAllVisible());
             return "reviews";
         }
     }

@@ -5,22 +5,27 @@
 
 <header th:replace="~{fragments :: header}"></header>
 
-<main class="container" style="padding-top: 50px;">
-    <h2>사용 후기</h2>
-    <p style="text-align: center; color: var(--text-muted); margin-bottom: 50px;">미래위즈 서비스를 이용한 분들의 소중한 이야기입니다.</p>
+<main class="container reviews-page-wrap">
+    <div style="text-align: center; margin-bottom: 50px;">
+        <h2 style="font-size: 36px; font-weight: 800; letter-spacing: -1px;">사용 후기</h2>
+        <p style="color: var(--text-gray); margin-top: 10px;">미래위즈 서비스를 이용한 분들의 소중한 이야기입니다.</p>
+    </div>
+
+    <!-- Error Message -->
+    <div th:if="${error}" style="max-width: 600px; margin: 0 auto 20px; color: red; text-align: center; background: #ffebee; padding: 10px; border-radius: 4px;" th:text="${error}"></div>
 
     <!-- Review Form -->
-    <div style="max-width: 600px; margin: 0 auto 50px; background: var(--bg-light); padding: 2rem; border-radius: 12px;">
-        <h3 style="margin-top: 0;">후기 남기기</h3>
+    <div style="max-width: 600px; margin: 0 auto 50px; background: var(--bg-badge); padding: 2rem; border-radius: 16px; border: 1px solid #eaeaea;">
+        <h3 style="margin-top: 0; font-size: 20px; margin-bottom: 20px;">후기 남기기</h3>
         <form th:action="@{/reviews/write}" method="post">
             <div style="display: flex; gap: 10px; margin-bottom: 1rem;">
-                <input type="text" name="author" placeholder="닉네임" required style="flex: 1; padding: 0.5rem; border: 1px solid #ddd; border-radius: 4px;">
-                <input type="password" name="password" placeholder="비밀번호" required style="flex: 1; padding: 0.5rem; border: 1px solid #ddd; border-radius: 4px;">
+                <input type="text" name="author" placeholder="닉네임" required style="flex: 1; padding: 0.8rem; border: 1px solid #ddd; border-radius: 8px;">
+                <input type="password" name="password" placeholder="비밀번호" required style="flex: 1; padding: 0.8rem; border: 1px solid #ddd; border-radius: 8px;">
             </div>
-            <textarea name="content" placeholder="솔직한 후기를 남겨주세요." required style="width: 100%; height: 100px; padding: 0.5rem; border: 1px solid #ddd; border-radius: 4px; box-sizing: border-box; margin-bottom: 1rem;"></textarea>
-            <div style="margin-bottom: 1rem;">
-                <label>평점: </label>
-                <select name="rating" style="padding: 0.5rem; border: 1px solid #ddd; border-radius: 4px;">
+            <textarea name="content" placeholder="솔직한 후기를 남겨주세요." required style="width: 100%; height: 100px; padding: 0.8rem; border: 1px solid #ddd; border-radius: 8px; box-sizing: border-box; margin-bottom: 1rem; resize: vertical;"></textarea>
+            <div style="margin-bottom: 1rem; display: flex; align-items: center; gap: 10px;">
+                <label style="font-weight: 600;">평점: </label>
+                <select name="rating" style="padding: 0.5rem; border: 1px solid #ddd; border-radius: 8px;">
                     <option value="5">★★★★★</option>
                     <option value="4">★★★★☆</option>
                     <option value="3">★★★☆☆</option>
@@ -28,35 +33,41 @@
                     <option value="1">★☆☆☆☆</option>
                 </select>
             </div>
-            <button type="submit" style="width: 100%; padding: 0.75rem; background: var(--primary-color); color: white; border: none; border-radius: 4px; cursor: pointer; font-weight: bold;">등록하기</button>
+            <button type="submit" style="width: 100%; padding: 1rem; background: var(--text-black); color: white; border: none; border-radius: 8px; cursor: pointer; font-weight: bold; font-size: 16px; transition: background 0.2s;">등록하기</button>
         </form>
     </div>
 
     <!-- Review List -->
     <div class="card-grid">
-        <div class="card" th:each="review : ${reviews}">
+        <div class="review-card" th:each="review : ${reviews}">
             <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
                 <span th:text="${review.author}" style="font-weight: bold; font-size: 1.1rem;">작성자</span>
-                <span style="color: #ffc107;" th:text="${'★'.repeat(review.rating) + '☆'.repeat(5-review.rating)}">★★★★★</span>
+                <span style="color: #ffc107; font-size: 18px;" th:text="${'★'.repeat(review.rating) + '☆'.repeat(5-review.rating)}">★★★★★</span>
             </div>
-            <p th:text="${review.content}" style="white-space: pre-wrap; color: var(--text-dark);">내용</p>
-            <div style="margin-top: 1.5rem; font-size: 0.85rem; color: var(--text-muted); display: flex; justify-content: space-between; align-items: center;">
+            <p th:text="${review.content}" style="white-space: pre-wrap; color: var(--text-dark); line-height: 1.6;">내용</p>
+            <div style="margin-top: 1.5rem; font-size: 0.85rem; color: var(--text-gray); display: flex; justify-content: space-between; align-items: center;">
                 <span th:text="${#temporals.format(review.createdAt, 'yyyy.MM.dd')}">2026.06.18</span>
                 <div>
-                    <span th:if="${review.isBest}" style="background: #e1f5fe; color: #0288d1; padding: 2px 8px; border-radius: 10px; font-weight: bold; margin-right: 10px;">BEST</span>
-                    <button th:onclick="'showDeleteForm(' + ${review.id} + ')'" style="background: none; border: none; color: #ff5252; cursor: pointer; font-size: 0.8rem;">삭제</button>
+                    <span th:if="${review.isBest}" style="background: #e1f5fe; color: #0288d1; padding: 4px 10px; border-radius: 12px; font-weight: bold; margin-right: 10px;">BEST</span>
+                    <button th:onclick="'showDeleteForm(' + ${review.id} + ')'" style="background: none; border: none; color: #ff5252; cursor: pointer; font-size: 0.8rem; font-weight: 600;">삭제</button>
                 </div>
             </div>
             <!-- Hidden Delete Form -->
             <div th:id="'delete-form-' + ${review.id}" style="display: none; margin-top: 1rem; padding-top: 1rem; border-top: 1px dashed #ddd;">
                 <form th:action="@{/reviews/delete}" method="post" style="display: flex; gap: 5px;">
                     <input type="hidden" name="id" th:value="${review.id}">
-                    <input type="password" name="password" placeholder="비밀번호" required style="flex: 1; padding: 0.3rem; border: 1px solid #ddd; border-radius: 4px; font-size: 0.8rem;">
-                    <button type="submit" style="padding: 0.3rem 0.6rem; background: #666; color: white; border: none; border-radius: 4px; cursor: pointer; font-size: 0.8rem;">확인</button>
-                    <button type="button" th:onclick="'hideDeleteForm(' + ${review.id} + ')'" style="padding: 0.3rem 0.6rem; background: #eee; border: none; border-radius: 4px; cursor: pointer; font-size: 0.8rem;">취소</button>
+                    <input type="password" name="password" placeholder="비밀번호" required style="flex: 1; padding: 0.4rem; border: 1px solid #ddd; border-radius: 4px; font-size: 0.8rem;">
+                    <button type="submit" style="padding: 0.4rem 0.8rem; background: var(--text-black); color: white; border: none; border-radius: 4px; cursor: pointer; font-size: 0.8rem;">확인</button>
+                    <button type="button" th:onclick="'hideDeleteForm(' + ${review.id} + ')'" style="padding: 0.4rem 0.8rem; background: #eee; border: none; border-radius: 4px; cursor: pointer; font-size: 0.8rem; color: #333;">취소</button>
                 </form>
             </div>
         </div>
+    </div>
+    
+    <!-- Pagination -->
+    <div class="pagination" th:if="${totalPages > 0}">
+        <a th:href="@{/reviews(page=${i})}" th:each="i : ${#numbers.sequence(1, totalPages)}" 
+           class="page-item" th:classappend="${i == currentPage} ? 'active' : ''" th:text="${i}">1</a>
     </div>
 </main>
 

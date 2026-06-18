@@ -5,17 +5,23 @@
 
 <header th:replace="~{fragments :: header}"></header>
 
-<main class="container" style="padding-top: 50px; max-width: 800px;">
-    <h2 style="margin-bottom: 50px;">자주하는 질문</h2>
+<main class="faq-page-wrap">
+    <div class="container" style="max-width: 800px;">
+        <div class="faq-header-wrap">
+            <h2 class="faq-title">자주하는 질문</h2>
+        </div>
 
-    <div class="faq-list">
-        <div class="faq-item" th:each="faq : ${faqs}">
-            <div class="faq-question">
-                <span th:text="${faq.question}">질문입니다.</span>
-                <span>▼</span>
-            </div>
-            <div class="faq-answer">
-                <p th:text="${faq.answer}">답변입니다.</p>
+        <div class="faq-list">
+            <div class="faq-item" th:each="faq : ${faqs}">
+                <div class="faq-question">
+                    <span th:text="${faq.question}">질문입니다.</span>
+                    <span class="faq-toggle-icon">+</span>
+                </div>
+                <div class="faq-answer">
+                    <div class="faq-answer-inner">
+                        <p th:text="${faq.answer}" style="white-space: pre-wrap;">답변입니다.</p>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -24,16 +30,28 @@
 <footer th:replace="~{fragments :: footer}"></footer>
 
 <script>
-    document.querySelectorAll('.faq-question').forEach(question => {
-        question.addEventListener('click', () => {
-            const answer = question.nextElementSibling;
-            const isVisible = answer.style.display === 'block';
-            
-            // Hide all others
-            document.querySelectorAll('.faq-answer').forEach(a => a.style.display = 'none');
-            
-            // Toggle current
-            answer.style.display = isVisible ? 'none' : 'block';
+    document.addEventListener('DOMContentLoaded', () => {
+        const faqItems = document.querySelectorAll('.faq-item');
+
+        faqItems.forEach(item => {
+            const question = item.querySelector('.faq-question');
+            const answer = item.querySelector('.faq-answer');
+
+            question.addEventListener('click', () => {
+                const isActive = item.classList.contains('active');
+                
+                // Close all
+                document.querySelectorAll('.faq-item').forEach(otherItem => {
+                    otherItem.classList.remove('active');
+                    otherItem.querySelector('.faq-answer').style.maxHeight = null;
+                });
+
+                // Toggle current
+                if (!isActive) {
+                    item.classList.add('active');
+                    answer.style.maxHeight = answer.scrollHeight + "px";
+                }
+            });
         });
     });
 </script>

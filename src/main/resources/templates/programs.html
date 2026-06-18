@@ -5,37 +5,114 @@
 
 <header th:replace="~{fragments :: header}"></header>
 
-<main class="section-white">
+<main class="programs-page-wrap section-white">
     <div class="container">
-        <div style="text-align: center; margin-bottom: 80px;">
-            <p style="color: var(--primary-blue); font-weight: 700;">Education App</p>
-            <h2 style="font-size: 48px; font-weight: 800; margin-top: 10px;">WW Kingdom</h2>
-            <p style="font-size: 20px; color: var(--text-gray); margin-top: 20px;">중등 영단어 · 영어듣기를 한 번에 정복하는 최고의 방법</p>
+        
+        <div style="text-align: center; margin-bottom: 50px;">
+            <h2 class="title-center" style="margin-bottom: 20px;">미래위즈 프로그램</h2>
+            <p style="font-size: 18px; color: var(--text-gray);">학습 목적에 맞는 프로그램을 선택해 보세요.</p>
         </div>
 
-        <!-- Main Info -->
-        <div class="app-showcase" style="margin-bottom: 100px;">
-            <div class="app-visual">
-                <img src="/images/ref/01.png" style="width: 300px; margin: 0 auto; display: block; border-radius: 40px; box-shadow: 0 20px 40px rgba(0,0,0,0.1);" alt="App Icon">
+        <!-- App Selector (Horizontal scroll/flex) -->
+        <div class="app-selector-grid">
+            <div class="app-selector-card active" onclick="selectApp(1)">
+                <img src="/images/ref/01.png" style="width: 60px; height: 60px; border-radius: 12px; margin-bottom: 10px;" alt="WW Kingdom">
+                <h4 style="font-size: 18px; font-weight: 700;">WW Kingdom</h4>
+                <p style="font-size: 13px; color: var(--text-gray);">중등 영단어 필수 앱</p>
             </div>
-            <div class="app-text">
-                <h3>가장 스마트한 영단어 정복</h3>
-                <p>단어 외우기가 힘든 학생들을 위해 미래위즈가 만들었습니다. <br>게임처럼 레벨을 넘어가며 자연스럽게 뇌에 각인되는 학습법을 직접 경험해 보세요.</p>
-                <div style="margin-top: 40px;">
-                    <a href="https://play.google.com/store/apps/details?id=com.miraewiz.eng_middle_word_basic" class="cta-button">지금 무료로 시작하기</a>
+            <!-- Dummy App 2 to show selection concept -->
+            <div class="app-selector-card" onclick="selectApp(2)">
+                <div style="width: 60px; height: 60px; background: #eee; border-radius: 12px; margin: 0 auto 10px; display: flex; align-items: center; justify-content: center; font-size: 24px;">📚</div>
+                <h4 style="font-size: 18px; font-weight: 700;">초등 영문법</h4>
+                <p style="font-size: 13px; color: var(--text-gray);">기초부터 탄탄하게 (출시예정)</p>
+            </div>
+            <!-- Dummy App 3 -->
+            <div class="app-selector-card" onclick="selectApp(3)">
+                <div style="width: 60px; height: 60px; background: #eee; border-radius: 12px; margin: 0 auto 10px; display: flex; align-items: center; justify-content: center; font-size: 24px;">🎧</div>
+                <h4 style="font-size: 18px; font-weight: 700;">리스닝 마스터</h4>
+                <p style="font-size: 13px; color: var(--text-gray);">원어민 발음 훈련 (출시예정)</p>
+            </div>
+        </div>
+
+        <!-- Main Info for Selected App (Currently hardcoded for WW Kingdom) -->
+        <div id="app-detail-1" class="app-detail-section">
+            <div class="app-showcase" style="margin-bottom: 80px; background: var(--bg-badge); padding: 40px; border-radius: 24px;">
+                <div class="app-visual" style="flex: 0.5;">
+                    <img src="/images/ref/01.png" style="width: 100%; max-width: 250px; margin: 0 auto; display: block; border-radius: 40px; box-shadow: 0 20px 40px rgba(0,0,0,0.1);" alt="App Icon">
+                </div>
+                <div class="app-text">
+                    <h3 style="font-size: 36px; font-weight: 800; letter-spacing: -1px; margin-bottom: 15px;">가장 스마트한 영단어 정복</h3>
+                    <p style="font-size: 18px; color: var(--text-gray); line-height: 1.6; margin-bottom: 30px;">
+                        단어 외우기가 힘든 학생들을 위해 미래위즈가 만들었습니다. <br>
+                        게임처럼 레벨을 넘어가며 자연스럽게 뇌에 각인되는 학습법을 직접 경험해 보세요.
+                    </p>
+                    <a href="https://play.google.com/store/apps/details?id=com.miraewiz.eng_middle_word_basic" class="google-play-btn" style="background: var(--primary-blue);">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/d/d0/Google_Play_Arrow_logo.svg" alt="Google Play Icon">
+                        <div class="google-play-text">
+                            <span>Google Play에서</span>
+                            <span>다운로드</span>
+                        </div>
+                    </a>
                 </div>
             </div>
+
+            <!-- Horizontal Slider for Screenshots -->
+            <h3 style="font-size: 24px; font-weight: 800; margin-bottom: 20px; text-align: center;">상세 스크린샷</h3>
+            <div class="slider-container">
+                <button class="slider-btn prev" onclick="moveSlide(-1)">&#10094;</button>
+                <div class="slider-track" id="sliderTrack">
+                    <div class="slider-item" th:each="i : ${#numbers.sequence(1, 37)}">
+                        <img th:src="@{'/images/ref/' + ${#numbers.formatInteger(i, 2)} + ${(i == 3 or i == 5 or i == 7 or i == 12) ? '.jpg' : '.png'}}" alt="App Screenshot">
+                    </div>
+                </div>
+                <button class="slider-btn next" onclick="moveSlide(1)">&#10095;</button>
+            </div>
         </div>
 
-        <!-- The 37 Screenshots Gallery: This is where they belong -->
-        <h3 class="title-center" style="font-size: 28px;">상세 스크린샷</h3>
-            <div class="screenshot-item" th:each="i : ${#numbers.sequence(1, 37)}">
-                <img th:src="@{'/images/ref/' + ${#numbers.formatInteger(i, 2)} + ${(i == 3 or i == 5 or i == 7 or i == 12) ? '.jpg' : '.png'}}" alt="App Screenshot">
-            </div>
     </div>
 </main>
 
 <footer th:replace="~{fragments :: footer}"></footer>
+
+<script>
+    // App Selection Logic
+    function selectApp(id) {
+        document.querySelectorAll('.app-selector-card').forEach(card => card.classList.remove('active'));
+        event.currentTarget.classList.add('active');
+        
+        if (id !== 1) {
+            alert('이 앱은 아직 준비 중입니다. WW Kingdom을 선택해주세요.');
+            document.querySelectorAll('.app-selector-card')[0].classList.add('active');
+            event.currentTarget.classList.remove('active');
+        }
+    }
+
+    // Horizontal Slider Logic
+    let currentSlideIndex = 0;
+    const itemsPerView = 3; // Number of screenshots visible at once
+    const totalItems = 37;
+
+    function moveSlide(direction) {
+        const track = document.getElementById('sliderTrack');
+        const itemWidth = document.querySelector('.slider-item').offsetWidth + 20; // width + gap
+        
+        currentSlideIndex += direction;
+        
+        // Boundaries
+        const maxIndex = totalItems - itemsPerView;
+        if (currentSlideIndex < 0) currentSlideIndex = 0;
+        if (currentSlideIndex > maxIndex) currentSlideIndex = maxIndex;
+        
+        track.style.transform = `translateX(-${currentSlideIndex * itemWidth}px)`;
+    }
+    
+    // Auto resize handling
+    window.addEventListener('resize', () => {
+        const track = document.getElementById('sliderTrack');
+        track.style.transform = `translateX(0px)`;
+        currentSlideIndex = 0;
+    });
+</script>
 
 </body>
 </html>
