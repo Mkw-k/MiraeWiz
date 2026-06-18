@@ -29,12 +29,9 @@
 
         <!-- The 37 Screenshots Gallery: This is where they belong -->
         <h3 class="title-center" style="font-size: 28px;">상세 스크린샷</h3>
-        <div class="screenshot-grid">
             <div class="screenshot-item" th:each="i : ${#numbers.sequence(1, 37)}">
-                <!-- Using appropriate extensions based on the actual files -->
-                <img th:src="@{'/images/ref/' + ${#numbers.formatInteger(i, 2)} + ${i == 3 or i == 5 or i == 7 or i == 12 or i == 16 or i == 18 or i == 26 or i == 28 or i == 30 ? '.jpg' : '.png'}}" alt="App Screenshot">
+                <img th:src="@{'/images/ref/' + ${#numbers.formatInteger(i, 2)} + ${(i == 3 or i == 5 or i == 7 or i == 12) ? '.jpg' : '.png'}}" alt="App Screenshot">
             </div>
-        </div>
     </div>
 </main>
 
