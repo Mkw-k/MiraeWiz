@@ -17,7 +17,7 @@ public class SecurityConfig {
         http
             .csrf(csrf -> csrf.disable()) // Development convenience, enable for prod if needed
             .authorizeHttpRequests(auth -> auth
-                .requestMatchers("/admin/**", "/api/admin/**").authenticated() // Admin pages and APIs protected
+                .requestMatchers("/admin", "/admin/**", "/api/admin/**").authenticated() // Admin pages and APIs protected
                 .anyRequest().permitAll() // All other pages open
             )
             .formLogin(form -> form
