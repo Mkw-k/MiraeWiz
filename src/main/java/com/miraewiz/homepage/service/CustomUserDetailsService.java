@@ -25,9 +25,19 @@ public class CustomUserDetailsService implements UserDetailsService {
             throw new UsernameNotFoundException("User not found: " + username);
         }
 
+        // H2 and many databases return column names in UPPERCASE when mapped to a generic Map
+        String dbUsername = (String) member.get("USERNAME");
+        String dbPassword = (String) member.get("PASSWORD");
+
+        if (dbUsername == null) {
+             // Fallback just in case MySQL returns lowercase
+             dbUsername = (String) member.get("username");
+             dbPassword = (String) member.get("password");
+        }
+
         return User.builder()
-                .username((String) member.get("username"))
-                .password((String) member.get("password"))
+                .username(dbUsername)
+                .password(dbPassword)
                 .roles("ADMIN")
                 .build();
     }
