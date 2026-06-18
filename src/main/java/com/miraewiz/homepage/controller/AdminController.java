@@ -17,4 +17,24 @@ public class AdminController {
     public String dashboard() {
         return "admin/dashboard";
     }
+
+    @GetMapping("/programs")
+    public String programs() {
+        return "admin/programs";
+    }
+
+    @GetMapping("/reviews")
+    public String reviews() {
+        return "admin/reviews";
+    }
+
+    @GetMapping("/faq")
+    public String faq() {
+        return "admin/faq";
+    }
+
+    @GetMapping("/content")
+    public String content() {
+        return "admin/content";
+    }
 }

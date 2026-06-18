@@ -1,11 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.miraewiz.homepage.mapper.ProgramMapper">
+    <select id="findAll" resultType="com.miraewiz.homepage.model.Program">
+        SELECT * FROM programs ORDER BY display_order ASC
+    </select>
     <select id="findAllVisible" resultType="com.miraewiz.homepage.model.Program">
         SELECT * FROM programs WHERE is_visible = TRUE ORDER BY display_order ASC
     </select>
-    <insert id="insert" parameterType="com.miraewiz.homepage.model.Program">
+    <select id="findById" resultType="com.miraewiz.homepage.model.Program">
+        SELECT * FROM programs WHERE id = #{id}
+    </select>
+    <insert id="insert" parameterType="com.miraewiz.homepage.model.Program" useGeneratedKeys="true" keyProperty="id">
         INSERT INTO programs (title, description, icon_url, google_play_url, app_store_url, display_order, is_visible)
         VALUES (#{title}, #{description}, #{iconUrl}, #{googlePlayUrl}, #{appStoreUrl}, #{displayOrder}, #{isVisible})
     </insert>
+    <update id="update" parameterType="com.miraewiz.homepage.model.Program">
+        UPDATE programs
+        SET title = #{title},
+            description = #{description},
+            icon_url = #{iconUrl},
+            google_play_url = #{googlePlayUrl},
+            app_store_url = #{appStoreUrl},
+            display_order = #{displayOrder},
+            is_visible = #{isVisible}
+        WHERE id = #{id}
+    </update>
+    <delete id="delete">
+        DELETE FROM programs WHERE id = #{id}
+    </delete>
 </mapper>

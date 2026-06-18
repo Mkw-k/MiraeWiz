@@ -7,4 +7,10 @@
     <select id="findByKey" resultType="com.miraewiz.homepage.model.SiteContent">
         SELECT * FROM site_contents WHERE content_key = #{contentKey}
     </select>
+    <update id="update" parameterType="com.miraewiz.homepage.model.SiteContent">
+        UPDATE site_contents
+        SET content_value = #{contentValue},
+            description = #{description}
+        WHERE content_key = #{contentKey}
+    </update>
 </mapper>

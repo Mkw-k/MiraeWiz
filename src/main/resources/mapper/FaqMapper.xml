@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.miraewiz.homepage.mapper.FaqMapper">
+    <select id="findAll" resultType="com.miraewiz.homepage.model.Faq">
+        SELECT * FROM faqs ORDER BY display_order ASC
+    </select>
+    <select id="findById" resultType="com.miraewiz.homepage.model.Faq">
+        SELECT * FROM faqs WHERE id = #{id}
+    </select>
+    <insert id="insert" parameterType="com.miraewiz.homepage.model.Faq" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO faqs (question, answer, category, display_order)
+        VALUES (#{question}, #{answer}, #{category}, #{displayOrder})
+    </insert>
+    <update id="update" parameterType="com.miraewiz.homepage.model.Faq">
+        UPDATE faqs
+        SET question = #{question},
+            answer = #{answer},
+            category = #{category},
+            display_order = #{displayOrder}
+        WHERE id = #{id}
+    </update>
+    <delete id="delete">
+        DELETE FROM faqs WHERE id = #{id}
+    </delete>
+</mapper>

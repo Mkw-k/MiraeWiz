@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.miraewiz.homepage.mapper.ReviewMapper">
+    <select id="findAll" resultType="com.miraewiz.homepage.model.Review">
+        SELECT * FROM reviews ORDER BY created_at DESC
+    </select>
+    <select id="findAllVisible" resultType="com.miraewiz.homepage.model.Review">
+        SELECT * FROM reviews WHERE is_visible = TRUE ORDER BY created_at DESC
+    </select>
+    <select id="findById" resultType="com.miraewiz.homepage.model.Review">
+        SELECT * FROM reviews WHERE id = #{id}
+    </select>
+    <insert id="insert" parameterType="com.miraewiz.homepage.model.Review" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO reviews (author, password, content, rating, is_best, is_visible)
+        VALUES (#{author}, #{password}, #{content}, #{rating}, #{isBest}, #{isVisible})
+    </insert>
+    <update id="update" parameterType="com.miraewiz.homepage.model.Review">
+        UPDATE reviews
+        SET content = #{content},
+            rating = #{rating},
+            is_best = #{isBest},
+            is_visible = #{isVisible}
+        WHERE id = #{id}
+    </update>
+    <update id="updateVisibility">
+        UPDATE reviews SET is_visible = #{isVisible} WHERE id = #{id}
+    </update>
+    <delete id="delete">
+        DELETE FROM reviews WHERE id = #{id}
+    </delete>
+</mapper>

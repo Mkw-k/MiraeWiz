@@ -8,4 +8,5 @@ import java.util.List;
 public interface SiteContentMapper {
     List<SiteContent> findAll();
     SiteContent findByKey(String contentKey);
+    void update(SiteContent siteContent);
 }
