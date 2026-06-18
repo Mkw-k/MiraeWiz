@@ -9,10 +9,13 @@
 <body>
 
 <header th:fragment="header">
-    <div class="container">
+    <div class="container header-inner">
+        <a href="/" class="logo-wrap">
+            <img src="/images/logo_placeholder.png" alt="Logo" class="nav-logo-img">
+            <span class="logo-text">MiraeWiz</span>
+        </a>
         <nav>
-            <a href="/" class="logo">MiraeWiz</a>
-            <ul>
+            <ul class="nav-list">
                 <li><a href="/">홈</a></li>
                 <li><a href="/about">회사소개</a></li>
                 <li><a href="/programs">프로그램</a></li>
