@@ -44,8 +44,8 @@
                 <span th:text="${review.author}" style="font-weight: bold; font-size: 1.1rem;">작성자</span>
                 <span style="color: #ffc107; font-size: 18px;" th:text="${'★'.repeat(review.rating) + '☆'.repeat(5-review.rating)}">★★★★★</span>
             </div>
-            <p th:text="${review.content}" style="white-space: pre-wrap; color: var(--text-dark); line-height: 1.6;">내용</p>
-            <div style="margin-top: 1.5rem; font-size: 0.85rem; color: var(--text-gray); display: flex; justify-content: space-between; align-items: center;">
+            <p th:text="${review.content}" style="white-space: pre-wrap; color: var(--text-dark); line-height: 1.6; flex: 1;">내용</p>
+            <div style="margin-top: auto; padding-top: 1.5rem; font-size: 0.85rem; color: var(--text-gray); display: flex; justify-content: space-between; align-items: center;">
                 <span th:text="${#temporals.format(review.createdAt, 'yyyy.MM.dd')}">2026.06.18</span>
                 <div>
                     <span th:if="${review.isBest}" style="background: #e1f5fe; color: #0288d1; padding: 4px 10px; border-radius: 12px; font-weight: bold; margin-right: 10px;">BEST</span>
