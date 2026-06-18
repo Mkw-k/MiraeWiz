@@ -13,40 +13,52 @@
             <p style="font-size: 18px; color: var(--text-gray);">학습 목적에 맞는 프로그램을 선택해 보세요.</p>
         </div>
 
-        <!-- App Selector (Horizontal scroll/flex) -->
+        <!-- App Selector (Static) -->
         <div class="app-selector-grid">
-            <div class="app-selector-card active" onclick="selectApp(1)">
-                <img src="/images/ref/01.png" style="width: 60px; height: 60px; border-radius: 12px; margin-bottom: 10px;" alt="WW Kingdom">
+            <div class="app-selector-card active">
+                <img src="/images/ref/01.png" style="width: 60px; height: 60px; border-radius: 12px; margin-bottom: 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.1);" alt="WW Kingdom">
                 <h4 style="font-size: 18px; font-weight: 700;">WW Kingdom</h4>
                 <p style="font-size: 13px; color: var(--text-gray);">중등 영단어 필수 앱</p>
             </div>
-            <!-- Dummy App 2 to show selection concept -->
-            <div class="app-selector-card" onclick="selectApp(2)">
+            <!-- Dummy Apps for visual consistency -->
+            <div class="app-selector-card" style="opacity: 0.6; cursor: default;">
                 <div style="width: 60px; height: 60px; background: #eee; border-radius: 12px; margin: 0 auto 10px; display: flex; align-items: center; justify-content: center; font-size: 24px;">📚</div>
                 <h4 style="font-size: 18px; font-weight: 700;">초등 영문법</h4>
-                <p style="font-size: 13px; color: var(--text-gray);">기초부터 탄탄하게 (출시예정)</p>
+                <p style="font-size: 13px; color: var(--text-gray);">출시 예정</p>
             </div>
-            <!-- Dummy App 3 -->
-            <div class="app-selector-card" onclick="selectApp(3)">
+            <div class="app-selector-card" style="opacity: 0.6; cursor: default;">
                 <div style="width: 60px; height: 60px; background: #eee; border-radius: 12px; margin: 0 auto 10px; display: flex; align-items: center; justify-content: center; font-size: 24px;">🎧</div>
                 <h4 style="font-size: 18px; font-weight: 700;">리스닝 마스터</h4>
-                <p style="font-size: 13px; color: var(--text-gray);">원어민 발음 훈련 (출시예정)</p>
+                <p style="font-size: 13px; color: var(--text-gray);">출시 예정</p>
             </div>
         </div>
 
-        <!-- Main Info for Selected App (Currently hardcoded for WW Kingdom) -->
-        <div id="app-detail-1" class="app-detail-section">
-            <div class="app-showcase" style="margin-bottom: 80px; background: var(--bg-badge); padding: 40px; border-radius: 24px;">
-                <div class="app-visual" style="flex: 0.5;">
-                    <img src="/images/ref/01.png" style="width: 100%; max-width: 250px; margin: 0 auto; display: block; border-radius: 40px; box-shadow: 0 20px 40px rgba(0,0,0,0.1);" alt="App Icon">
+        <!-- Main Info for WW Kingdom (Static & Detailed) -->
+        <div class="app-detail-section">
+            <div class="app-showcase" style="margin-bottom: 80px; background: var(--bg-badge); padding: 50px; border-radius: 24px; box-shadow: inset 0 0 0 1px rgba(0,0,0,0.05);">
+                <div class="app-visual" style="flex: 0.4;">
+                    <img src="/images/ref/01.png" style="width: 100%; max-width: 280px; margin: 0 auto; display: block; border-radius: 40px; box-shadow: 0 20px 40px rgba(0,0,0,0.15);" alt="App Icon">
                 </div>
-                <div class="app-text">
-                    <h3 style="font-size: 36px; font-weight: 800; letter-spacing: -1px; margin-bottom: 15px;">가장 스마트한 영단어 정복</h3>
-                    <p style="font-size: 18px; color: var(--text-gray); line-height: 1.6; margin-bottom: 30px;">
-                        단어 외우기가 힘든 학생들을 위해 미래위즈가 만들었습니다. <br>
-                        게임처럼 레벨을 넘어가며 자연스럽게 뇌에 각인되는 학습법을 직접 경험해 보세요.
-                    </p>
-                    <a href="https://play.google.com/store/apps/details?id=com.miraewiz.eng_middle_word_basic" class="google-play-btn" style="background: var(--primary-blue);">
+                <div class="app-text" style="flex: 0.6;">
+                    <span style="display: inline-block; background: #e7f5ff; color: #1864ab; font-size: 13px; font-weight: bold; padding: 6px 12px; border-radius: 20px; margin-bottom: 15px;">No.1 에듀테크 앱</span>
+                    <h3 style="font-size: 42px; font-weight: 800; letter-spacing: -1px; margin-bottom: 20px; line-height: 1.2;">게이미피케이션으로 완성하는<br><span style="color: var(--text-orange);">완벽한 영단어 정복</span></h3>
+                    
+                    <ul style="margin-bottom: 35px; list-style: none; padding: 0;">
+                        <li style="font-size: 17px; color: #444; margin-bottom: 12px; display: flex; align-items: flex-start; gap: 10px;">
+                            <span style="color: var(--primary-blue); font-weight: bold;">✓</span> 
+                            <span>단순 암기는 그만! 나만의 왕국을 건설하며 자연스럽게 단어를 습득하세요.</span>
+                        </li>
+                        <li style="font-size: 17px; color: #444; margin-bottom: 12px; display: flex; align-items: flex-start; gap: 10px;">
+                            <span style="color: var(--primary-blue); font-weight: bold;">✓</span> 
+                            <span>중등 필수 어휘부터 듣기, 쓰기, 말하기까지 한 번에 끝내는 통합 솔루션.</span>
+                        </li>
+                        <li style="font-size: 17px; color: #444; margin-bottom: 12px; display: flex; align-items: flex-start; gap: 10px;">
+                            <span style="color: var(--primary-blue); font-weight: bold;">✓</span> 
+                            <span>틀린 단어만 쏙쏙 뽑아주는 오답 노트 시스템으로 학습 효율 극대화.</span>
+                        </li>
+                    </ul>
+
+                    <a href="https://play.google.com/store/apps/details?id=com.miraewiz.eng_middle_word_basic" target="_blank" class="google-play-btn" style="background: #000; color: #fff;">
                         <img src="https://upload.wikimedia.org/wikipedia/commons/d/d0/Google_Play_Arrow_logo.svg" alt="Google Play Icon">
                         <div class="google-play-text">
                             <span>Google Play에서</span>
@@ -56,17 +68,26 @@
                 </div>
             </div>
 
-            <!-- Horizontal Slider for Screenshots -->
-            <h3 style="font-size: 24px; font-weight: 800; margin-bottom: 20px; text-align: center;">상세 스크린샷</h3>
-            <div class="slider-container">
-                <button class="slider-btn prev" onclick="moveSlide(-1)">&#10094;</button>
-                <div class="slider-track" id="sliderTrack">
-                    <div class="slider-item" th:each="i : ${#numbers.sequence(1, 37)}">
-                        <img th:src="@{'/images/ref/' + ${#numbers.formatInteger(i, 2)} + ${(i == 3 or i == 5 or i == 7 or i == 12) ? '.jpg' : '.png'}}" alt="App Screenshot">
+            <!-- Horizontal Slider for Screenshots (App Store Style - 1 at a time) -->
+            <h3 style="font-size: 28px; font-weight: 800; margin-bottom: 30px; text-align: center; letter-spacing: -0.5px;">미리보기</h3>
+            
+            <!-- Modified Slider Container for 1-item view -->
+            <div class="slider-container" style="max-width: 400px; margin: 0 auto; background: transparent; padding: 0;">
+                <button class="slider-btn prev" onclick="moveSlide(-1)" style="left: -60px;">&#10094;</button>
+                
+                <div style="overflow: hidden; border-radius: 30px; border: 10px solid #333; box-shadow: 0 20px 40px rgba(0,0,0,0.2); background: #fff;">
+                    <div class="slider-track" id="sliderTrack" style="gap: 0;">
+                        <div class="slider-item" th:each="i : ${#numbers.sequence(1, 37)}" style="min-width: 100%;">
+                            <!-- Adjust extensions as previously mapped -->
+                            <img th:src="@{'/images/ref/' + ${#numbers.formatInteger(i, 2)} + ${(i == 3 or i == 5 or i == 7 or i == 12) ? '.jpg' : '.png'}}" alt="App Screenshot" style="border-radius: 0; box-shadow: none; display: block;">
+                        </div>
                     </div>
                 </div>
-                <button class="slider-btn next" onclick="moveSlide(1)">&#10095;</button>
+
+                <button class="slider-btn next" onclick="moveSlide(1)" style="right: -60px;">&#10095;</button>
             </div>
+            
+            <p style="text-align: center; color: var(--text-gray); margin-top: 20px; font-size: 14px;">화살표를 눌러 화면을 넘겨보세요.</p>
         </div>
 
     </div>
@@ -75,26 +96,14 @@
 <footer th:replace="~{fragments :: footer}"></footer>
 
 <script>
-    // App Selection Logic
-    function selectApp(id) {
-        document.querySelectorAll('.app-selector-card').forEach(card => card.classList.remove('active'));
-        event.currentTarget.classList.add('active');
-        
-        if (id !== 1) {
-            alert('이 앱은 아직 준비 중입니다. WW Kingdom을 선택해주세요.');
-            document.querySelectorAll('.app-selector-card')[0].classList.add('active');
-            event.currentTarget.classList.remove('active');
-        }
-    }
-
-    // Horizontal Slider Logic
+    // Horizontal Slider Logic (App Store Style - 1 at a time)
     let currentSlideIndex = 0;
-    const itemsPerView = 3; // Number of screenshots visible at once
+    const itemsPerView = 1; // Show exactly 1 screenshot
     const totalItems = 37;
 
     function moveSlide(direction) {
         const track = document.getElementById('sliderTrack');
-        const itemWidth = document.querySelector('.slider-item').offsetWidth + 20; // width + gap
+        const itemWidth = document.querySelector('.slider-item').offsetWidth; // gap is 0 now
         
         currentSlideIndex += direction;
         
