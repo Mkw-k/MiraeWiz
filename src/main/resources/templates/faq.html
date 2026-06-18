@@ -10,12 +10,19 @@
         <div class="faq-header-wrap">
             <h2 class="faq-title">자주하는 질문</h2>
         </div>
+        
+        <div class="faq-category-tabs">
+            <button class="faq-tab active">전체</button>
+            <button class="faq-tab">서비스</button>
+            <button class="faq-tab">이용안내</button>
+            <button class="faq-tab">기술문의</button>
+        </div>
 
         <div class="faq-list">
             <div class="faq-item" th:each="faq : ${faqs}">
                 <div class="faq-question">
                     <span th:text="${faq.question}">질문입니다.</span>
-                    <span class="faq-toggle-icon">+</span>
+                    <span class="faq-toggle-icon">▼</span>
                 </div>
                 <div class="faq-answer">
                     <div class="faq-answer-inner">

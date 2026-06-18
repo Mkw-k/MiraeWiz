@@ -27,7 +27,7 @@ class MyBatisIntegrationTest {
     void testFindAllVisiblePrograms() {
         List<Program> programs = programMapper.findAllVisible();
         assertThat(programs).isNotEmpty();
-        assertThat(programs.get(0).getTitle()).isEqualTo("중학 영단어");
+        assertThat(programs.get(0).getTitle()).isEqualTo("WW Kingdom");
     }
 
     @Test
