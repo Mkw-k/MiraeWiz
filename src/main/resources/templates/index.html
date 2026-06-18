@@ -6,58 +6,60 @@
 <header th:replace="~{fragments :: header}"></header>
 
 <main>
-    <!-- Hero Section -->
+    <!-- Hero Section: Exactly matching the Kakao Reference image layout -->
     <section class="hero">
-        <div class="hero-content">
+        <div class="container">
+            <p style="color: var(--primary-blue); font-weight: 700; margin-bottom: 15px;">미래를 여는 교육 브랜드, 미래위즈</p>
             <h1 th:text="${vision.contentValue}">미래를 향한 끊임없는 도전</h1>
-            <p>교육의 가치를 기술로 실현하는 미래위즈입니다.</p>
-            <a href="/programs" class="btn-primary">프로그램 둘러보기</a>
-        </div>
-    </section>
-
-    <!-- Program Gallery -->
-    <section>
-        <div class="container">
-            <h2 class="section-title">주요 서비스 및 앱 스크린샷</h2>
-            <div class="gallery">
-                <!-- Loop through all 37 images -->
-                <div class="gallery-item" th:each="i : ${#numbers.sequence(1, 37)}">
-                    <img th:src="@{'/images/ref/' + ${#numbers.formatInteger(i, 2)} + ${i == 3 or i == 5 or i == 7 or i == 12 or i == 16 or i == 18 or i == 26 or i == 28 or i == 30 ? '.jpg' : '.png'}}" alt="Screenshot">
-                </div>
+            <p>우리는 교육의 가치를 기술로 실현하여,<br>더 나은 학습 경험을 세상에 선물합니다.</p>
+            <a href="/programs" class="cta-button">WW Kingdom 다운로드</a>
+            
+            <!-- Hero Mockup: This is where the reference image goes -->
+            <div class="hero-img-wrap">
+                <img src="/images/ref/KakaoTalk_Photo_2026-06-18-13-56-09.png" alt="MiraeWiz Hero Mockup">
             </div>
         </div>
     </section>
 
-    <!-- Programs Summary -->
-    <section style="background: var(--bg-light);">
+    <!-- Key App Section: Single Primary App focus -->
+    <section class="section-gray">
         <div class="container">
-            <h2 class="section-title">미래위즈 프로그램</h2>
-            <div class="card-grid">
-                <div class="card" th:each="program : ${programs}" style="text-align: center;">
-                    <img th:src="${program.iconUrl}" class="app-icon" alt="App Icon">
-                    <h3 th:text="${program.title}">프로그램 제목</h3>
-                    <p th:text="${program.description}">프로그램 설명</p>
-                    <a th:href="@{/programs}" style="color: var(--primary-color); font-weight: bold;">자세히 보기 &rarr;</a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Review Highlight -->
-    <section style="background: var(--bg-light);">
-        <div class="container">
-            <h2>사용자 후기</h2>
-            <div class="card-grid">
-                <div class="card" th:each="review : ${bestReviews}">
-                    <p th:text="'&ldquo;' + ${review.content} + '&rdquo;'">후기 내용</p>
-                    <div style="margin-top: 1rem; font-weight: bold;">
-                        <span th:text="${review.author}">작성자</span>
-                        <span style="color: #ffc107;"> ★★★★★</span>
+            <h2 class="title-center">대표 서비스</h2>
+            <div class="app-showcase" th:each="program : ${programs}" th:if="${program.id == 1}">
+                <div class="app-text">
+                    <h3 style="font-size: 32px; margin-bottom: 20px;" th:text="${program.title}">WW Kingdom</h3>
+                    <p style="font-size: 18px; color: var(--text-gray); margin-bottom: 30px;" th:text="${program.description}">설명</p>
+                    <div style="display: flex; gap: 15px;">
+                        <a th:href="${program.googlePlayUrl}" class="cta-button" style="padding: 10px 24px; font-size: 15px;">Google Play</a>
                     </div>
                 </div>
+                <div class="app-visual">
+                    <img src="/images/ref/01.png" alt="App Preview">
+                </div>
             </div>
-            <div style="text-align: center; margin-top: 3rem;">
-                <a href="/reviews" style="text-decoration: underline;">전체 후기 보기</a>
+        </div>
+    </section>
+
+    <!-- Highlights Section: Simple & Clean -->
+    <section class="section-white">
+        <div class="container">
+            <h2 class="title-center">왜 미래위즈인가요?</h2>
+            <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 40px; text-align: center;">
+                <div>
+                    <div style="font-size: 40px; margin-bottom: 20px;">🎮</div>
+                    <h4>게이미피케이션</h4>
+                    <p style="color: var(--text-gray);">지루한 암기가 아닌 즐거운 게임으로 배우는 교육</p>
+                </div>
+                <div>
+                    <div style="font-size: 40px; margin-bottom: 20px;">📚</div>
+                    <h4>핵심 교육 데이터</h4>
+                    <p style="color: var(--text-gray);">교과 과정의 필수적인 데이터만 정밀하게 선별</p>
+                </div>
+                <div>
+                    <div style="font-size: 40px; margin-bottom: 20px;">⚡</div>
+                    <h4>직관적인 학습</h4>
+                    <p style="color: var(--text-gray);">누구나 쉽고 빠르게 익히는 유저 인터페이스</p>
+                </div>
             </div>
         </div>
     </section>
