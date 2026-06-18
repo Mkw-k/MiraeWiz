@@ -75,11 +75,11 @@
             <div class="slider-container" style="max-width: 320px; margin: 0 auto; background: transparent; padding: 0; overflow: visible; position: relative;">
                 <button class="slider-btn prev" onclick="moveSlide(-1)" style="left: -70px;">&#10094;</button>
                 
-                <div style="overflow: hidden; border-radius: 30px; border: 10px solid #333; box-shadow: 0 20px 40px rgba(0,0,0,0.2); background: #fff; position: relative; z-index: 5;">
-                    <div class="slider-track" id="sliderTrack" style="gap: 0; display: flex; width: 100%;">
-                        <div class="slider-item" th:each="i : ${#numbers.sequence(1, 37)}" style="flex: 0 0 100%; min-width: 100%;">
+                <div style="overflow: hidden; border-radius: 30px; border: 10px solid #333; box-shadow: 0 20px 40px rgba(0,0,0,0.2); background: #fafafa; position: relative; z-index: 5; aspect-ratio: 9/19; display: flex;">
+                    <div class="slider-track" id="sliderTrack" style="gap: 0; display: flex; width: 100%; height: 100%;">
+                        <div class="slider-item" th:each="i : ${#numbers.sequence(1, 37)}" style="flex: 0 0 100%; min-width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; background: #fff;">
                             <!-- Adjust extensions as previously mapped -->
-                            <img th:src="@{'/images/ref/' + ${#numbers.formatInteger(i, 2)} + ${(i == 3 or i == 5 or i == 7 or i == 12) ? '.jpg' : '.png'}}" alt="App Screenshot" style="border-radius: 0; box-shadow: none; display: block; width: 100%;">
+                            <img th:src="@{'/images/ref/' + ${#numbers.formatInteger(i, 2)} + ${(i == 3 or i == 5 or i == 7 or i == 12) ? '.jpg' : '.png'}}" alt="App Screenshot" style="width: 100%; height: 100%; object-fit: contain; border-radius: 0; box-shadow: none; display: block;">
                         </div>
                     </div>
                 </div>
