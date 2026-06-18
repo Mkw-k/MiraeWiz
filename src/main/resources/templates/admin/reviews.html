@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Reviews Admin - MiraeWiz</title>
+    <style>
+        body { font-family: sans-serif; margin: 0; display: flex; height: 100vh; background: #f9f9f9; }
+        .sidebar { width: 250px; background: #333; color: white; padding: 1rem; }
+        .content { flex: 1; padding: 2rem; overflow-y: auto; }
+        nav ul { list-style: none; padding: 0; }
+        nav li { margin-bottom: 1rem; }
+        nav a { color: #aaa; text-decoration: none; }
+        nav a:hover, nav a.active { color: white; font-weight: bold; }
+        .header { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #ddd; padding-bottom: 1rem; margin-bottom: 2rem; }
+        table { width: 100%; border-collapse: collapse; background: white; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
+        th, td { padding: 12px; text-align: left; border-bottom: 1px solid #eee; }
+        th { background: #f1f1f1; font-weight: 600; }
+        button { padding: 6px 12px; border: none; border-radius: 4px; cursor: pointer; }
+        .btn-danger { background: #ff4d4f; color: white; }
+        .btn-toggle { background: #1890ff; color: white; }
+        .btn-secondary { background: #d9d9d9; color: black; }
+    </style>
+</head>
+<body>
+    <div class="sidebar">
+        <h3>MiraeWiz Admin</h3>
+        <nav>
+            <ul>
+                <li><a href="/admin/dashboard">Dashboard</a></li>
+                <li><a href="/admin/programs">Programs</a></li>
+                <li><a href="/admin/reviews" class="active">Reviews</a></li>
+                <li><a href="/admin/faq">FAQ</a></li>
+                <li><a href="/admin/content">Site Content</a></li>
+                <li>
+                    <form th:action="@{/admin/logout}" method="post">
+                        <button type="submit" style="background: none; border: none; color: #aaa; cursor: pointer; padding: 0; font-size: 1rem;">Logout</button>
+                    </form>
+                </li>
+            </ul>
+        </nav>
+    </div>
+    <div class="content">
+        <div class="header">
+            <h1>사용후기 관리</h1>
+        </div>
+        
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>작성자</th>
+                    <th>내용</th>
+                    <th>평점</th>
+                    <th>날짜</th>
+                    <th>상태</th>
+                    <th>관리</th>
+                </tr>
+            </thead>
+            <tbody id="reviewTableBody">
+                <!-- Data injected by JS -->
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', loadReviews);
+
+        function loadReviews() {
+            fetch('/api/admin/reviews')
+                .then(res => res.json())
+                .then(data => {
+                    const tbody = document.getElementById('reviewTableBody');
+                    tbody.innerHTML = '';
+                    data.forEach(r => {
+                        const tr = document.createElement('tr');
+                        tr.innerHTML = `
+                            <td>${r.id}</td>
+                            <td>${r.author}</td>
+                            <td style="max-width: 300px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">${r.content}</td>
+                            <td>${r.rating}</td>
+                            <td>${new Date(r.createdAt).toLocaleDateString()}</td>
+                            <td>${r.isVisible ? '<span style="color:green">공개</span>' : '<span style="color:red">숨김</span>'}</td>
+                            <td>
+                                <button class="btn-toggle" onclick="toggleVisibility(${r.id}, ${!r.isVisible})">${r.isVisible ? '숨기기' : '공개하기'}</button>
+                                <button class="btn-danger" onclick="deleteReview(${r.id})">삭제</button>
+                            </td>
+                        `;
+                        tbody.appendChild(tr);
+                    });
+                });
+        }
+
+        function toggleVisibility(id, isVisible) {
+            fetch(`/api/admin/reviews/${id}/visibility?isVisible=${isVisible}`, { method: 'PATCH' })
+                .then(() => loadReviews());
+        }
+
+        function deleteReview(id) {
+            if(confirm('정말 삭제하시겠습니까?')) {
+                fetch(`/api/admin/reviews/${id}`, { method: 'DELETE' })
+                    .then(() => loadReviews());
+            }
+        }
+    </script>
+</body>
+</html>

@@ -1,5 +1,11 @@
 -- MiraeWiz Homepage Schema (Updated)
 
+DROP TABLE IF EXISTS reviews;
+DROP TABLE IF EXISTS programs;
+DROP TABLE IF EXISTS faqs;
+DROP TABLE IF EXISTS site_contents;
+DROP TABLE IF EXISTS members;
+
 -- Member (Admin) Table
 CREATE TABLE IF NOT EXISTS members (
     id BIGINT AUTO_INCREMENT PRIMARY KEY,

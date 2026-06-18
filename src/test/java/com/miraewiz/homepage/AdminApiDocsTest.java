@@ -28,7 +28,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest
 @ExtendWith({RestDocumentationExtension.class, SpringExtension.class})
 @AutoConfigureMockMvc
-@ActiveProfiles("local")
+@ActiveProfiles("test")
 class AdminApiDocsTest {
 
     @Autowired

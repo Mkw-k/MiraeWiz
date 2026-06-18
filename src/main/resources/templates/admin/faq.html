@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>FAQ Admin - MiraeWiz</title>
+    <style>
+        body { font-family: sans-serif; margin: 0; display: flex; height: 100vh; background: #f9f9f9; }
+        .sidebar { width: 250px; background: #333; color: white; padding: 1rem; }
+        .content { flex: 1; padding: 2rem; overflow-y: auto; }
+        nav ul { list-style: none; padding: 0; }
+        nav li { margin-bottom: 1rem; }
+        nav a { color: #aaa; text-decoration: none; }
+        nav a:hover, nav a.active { color: white; font-weight: bold; }
+        .header { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #ddd; padding-bottom: 1rem; margin-bottom: 2rem; }
+        table { width: 100%; border-collapse: collapse; background: white; box-shadow: 0 1px 3px rgba(0,0,0,0.1); margin-bottom: 2rem; }
+        th, td { padding: 12px; text-align: left; border-bottom: 1px solid #eee; }
+        th { background: #f1f1f1; font-weight: 600; }
+        button { padding: 6px 12px; border: none; border-radius: 4px; cursor: pointer; color: white; }
+        .btn-primary { background: #007bff; }
+        .btn-danger { background: #ff4d4f; }
+        .form-panel { background: white; padding: 20px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); border-radius: 8px; }
+        input, select, textarea { width: 100%; padding: 8px; margin-bottom: 10px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box; }
+    </style>
+</head>
+<body>
+    <div class="sidebar">
+        <h3>MiraeWiz Admin</h3>
+        <nav>
+            <ul>
+                <li><a href="/admin/dashboard">Dashboard</a></li>
+                <li><a href="/admin/programs">Programs</a></li>
+                <li><a href="/admin/reviews">Reviews</a></li>
+                <li><a href="/admin/faq" class="active">FAQ</a></li>
+                <li><a href="/admin/content">Site Content</a></li>
+                <li>
+                    <form th:action="@{/admin/logout}" method="post">
+                        <button type="submit" style="background: none; border: none; color: #aaa; cursor: pointer; padding: 0; font-size: 1rem;">Logout</button>
+                    </form>
+                </li>
+            </ul>
+        </nav>
+    </div>
+    <div class="content">
+        <div class="header">
+            <h1>FAQ 관리</h1>
+        </div>
+        
+        <table>
+            <thead>
+                <tr>
+                    <th>카테고리</th>
+                    <th>질문</th>
+                    <th>순서</th>
+                    <th>관리</th>
+                </tr>
+            </thead>
+            <tbody id="faqTableBody">
+                <!-- Data injected by JS -->
+            </tbody>
+        </table>
+
+        <div class="form-panel">
+            <h3>새 FAQ 등록</h3>
+            <form id="addFaqForm" onsubmit="addFaq(event)">
+                <input type="text" id="category" placeholder="카테고리 (예: 서비스, 이용안내)" required>
+                <input type="text" id="question" placeholder="질문" required>
+                <textarea id="answer" placeholder="답변" rows="3" required></textarea>
+                <input type="number" id="displayOrder" placeholder="노출 순서 (숫자)" required value="0">
+                <button type="submit" class="btn-primary">등록하기</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', loadFaqs);
+
+        function loadFaqs() {
+            fetch('/api/admin/faqs')
+                .then(res => res.json())
+                .then(data => {
+                    const tbody = document.getElementById('faqTableBody');
+                    tbody.innerHTML = '';
+                    data.forEach(f => {
+                        const tr = document.createElement('tr');
+                        tr.innerHTML = `
+                            <td>${f.category}</td>
+                            <td>${f.question}</td>
+                            <td>${f.displayOrder}</td>
+                            <td>
+                                <button class="btn-danger" onclick="deleteFaq(${f.id})">삭제</button>
+                            </td>
+                        `;
+                        tbody.appendChild(tr);
+                    });
+                });
+        }
+
+        function addFaq(e) {
+            e.preventDefault();
+            const faq = {
+                category: document.getElementById('category').value,
+                question: document.getElementById('question').value,
+                answer: document.getElementById('answer').value,
+                displayOrder: parseInt(document.getElementById('displayOrder').value)
+            };
+
+            fetch('/api/admin/faqs', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(faq)
+            }).then(() => {
+                document.getElementById('addFaqForm').reset();
+                loadFaqs();
+            });
+        }
+
+        function deleteFaq(id) {
+            if(confirm('정말 삭제하시겠습니까?')) {
+                fetch(`/api/admin/faqs/${id}`, { method: 'DELETE' })
+                    .then(() => loadFaqs());
+            }
+        }
+    </script>
+</body>
+</html>

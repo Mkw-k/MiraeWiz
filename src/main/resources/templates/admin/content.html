@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Site Content Admin - MiraeWiz</title>
+    <style>
+        body { font-family: sans-serif; margin: 0; display: flex; height: 100vh; background: #f9f9f9; }
+        .sidebar { width: 250px; background: #333; color: white; padding: 1rem; }
+        .content { flex: 1; padding: 2rem; overflow-y: auto; }
+        nav ul { list-style: none; padding: 0; }
+        nav li { margin-bottom: 1rem; }
+        nav a { color: #aaa; text-decoration: none; }
+        nav a:hover, nav a.active { color: white; font-weight: bold; }
+        .header { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #ddd; padding-bottom: 1rem; margin-bottom: 2rem; }
+        .content-box { background: white; padding: 20px; margin-bottom: 20px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); border-radius: 8px; }
+        h3 { margin-top: 0; color: #333; }
+        textarea { width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box; font-family: inherit; margin-bottom: 10px; }
+        button { padding: 8px 16px; border: none; border-radius: 4px; cursor: pointer; color: white; background: #28a745; font-weight: bold; }
+        .success-msg { color: green; display: none; margin-left: 10px; }
+    </style>
+</head>
+<body>
+    <div class="sidebar">
+        <h3>MiraeWiz Admin</h3>
+        <nav>
+            <ul>
+                <li><a href="/admin/dashboard">Dashboard</a></li>
+                <li><a href="/admin/programs">Programs</a></li>
+                <li><a href="/admin/reviews">Reviews</a></li>
+                <li><a href="/admin/faq">FAQ</a></li>
+                <li><a href="/admin/content" class="active">Site Content</a></li>
+                <li>
+                    <form th:action="@{/admin/logout}" method="post">
+                        <button type="submit" style="background: none; border: none; color: #aaa; cursor: pointer; padding: 0; font-size: 1rem;">Logout</button>
+                    </form>
+                </li>
+            </ul>
+        </nav>
+    </div>
+    <div class="content">
+        <div class="header">
+            <h1>홈페이지 문구 관리</h1>
+        </div>
+        
+        <div id="contentList">
+            <!-- Data injected by JS -->
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', loadContents);
+
+        function loadContents() {
+            fetch('/api/admin/contents')
+                .then(res => res.json())
+                .then(data => {
+                    const list = document.getElementById('contentList');
+                    list.innerHTML = '';
+                    data.forEach(c => {
+                        const div = document.createElement('div');
+                        div.className = 'content-box';
+                        div.innerHTML = `
+                            <h3>${c.description} <small style="color:#888; font-size:12px;">(${c.contentKey})</small></h3>
+                            <textarea id="val_${c.contentKey}" rows="4">${c.contentValue}</textarea>
+                            <div>
+                                <button onclick="updateContent('${c.contentKey}', '${c.description}')">수정 저장</button>
+                                <span id="msg_${c.contentKey}" class="success-msg">저장되었습니다!</span>
+                            </div>
+                        `;
+                        list.appendChild(div);
+                    });
+                });
+        }
+
+        function updateContent(key, description) {
+            const value = document.getElementById('val_' + key).value;
+            fetch(`/api/admin/contents/${key}`, {
+                method: 'PUT',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ contentValue: value, description: description })
+            }).then(() => {
+                const msg = document.getElementById('msg_' + key);
+                msg.style.display = 'inline';
+                setTimeout(() => msg.style.display = 'none', 2000);
+            });
+        }
+    </script>
+</body>
+</html>
