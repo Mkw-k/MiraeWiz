@@ -1,7 +1,9 @@
 package com.miraewiz.homepage;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.miraewiz.homepage.model.Faq;
 import com.miraewiz.homepage.model.Program;
+import com.miraewiz.homepage.model.SiteContent;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -76,5 +78,42 @@ class AdminApiDocsTest {
                 .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andDo(document("admin-get-contents"));
+    }
+
+    @Test
+    @WithMockUser(roles = "ADMIN")
+    void createNewFaq() throws Exception {
+        Faq faq = new Faq();
+        faq.setQuestion("New Question");
+        faq.setAnswer("New Answer");
+        faq.setCategory("General");
+
+        this.mockMvc.perform(post("/api/admin/faqs")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(objectMapper.writeValueAsString(faq)))
+                .andExpect(status().isOk())
+                .andDo(document("admin-create-faq"));
+    }
+
+    @Test
+    @WithMockUser(roles = "ADMIN")
+    void updateSiteContent() throws Exception {
+        SiteContent content = new SiteContent();
+        content.setContentValue("Updated Value");
+        content.setDescription("Updated Desc");
+
+        this.mockMvc.perform(put("/api/admin/contents/ABOUT_VISION")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(objectMapper.writeValueAsString(content)))
+                .andExpect(status().isOk())
+                .andDo(document("admin-update-content"));
+    }
+
+    @Test
+    @WithMockUser(roles = "ADMIN")
+    void deleteProgram() throws Exception {
+        this.mockMvc.perform(delete("/api/admin/programs/1"))
+                .andExpect(status().isNoContent())
+                .andDo(document("admin-delete-program"));
     }
 }

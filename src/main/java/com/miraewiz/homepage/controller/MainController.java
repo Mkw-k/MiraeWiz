@@ -1,6 +1,11 @@
 package com.miraewiz.homepage.controller;
 
+import com.miraewiz.homepage.mapper.FaqMapper;
+import com.miraewiz.homepage.mapper.ProgramMapper;
+import com.miraewiz.homepage.mapper.ReviewMapper;
+import com.miraewiz.homepage.mapper.SiteContentMapper;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
@@ -22,7 +27,7 @@ public class MainController {
     @GetMapping("/")
     public String index(Model model) {
         model.addAttribute("programs", programMapper.findAllVisible());
-        model.addAttribute("bestReviews", reviewMapper.findAllVisible()); // Should filter by isBest in real case
+        model.addAttribute("bestReviews", reviewMapper.findAllVisible()); 
         model.addAttribute("vision", siteContentMapper.findByKey("ABOUT_VISION"));
         return "index";
     }

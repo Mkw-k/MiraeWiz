@@ -36,4 +36,17 @@ public class ReviewController {
         reviewMapper.insert(review);
         return "redirect:/reviews";
     }
+
+    @PostMapping("/delete")
+    public String deleteReview(Long id, String password, Model model) {
+        Review review = reviewMapper.findById(id);
+        if (review != null && passwordEncoder.matches(password, review.getPassword())) {
+            reviewMapper.delete(id);
+            return "redirect:/reviews";
+        } else {
+            model.addAttribute("error", "비밀번호가 일치하지 않습니다.");
+            model.addAttribute("reviews", reviewMapper.findAllVisible());
+            return "reviews";
+        }
+    }
 }

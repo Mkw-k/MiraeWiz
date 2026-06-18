@@ -1,133 +1,106 @@
 /* Global Styles */
 :root {
-    --primary-color: #007bff;
-    --secondary-color: #6c757d;
-    --bg-light: #f8f9fa;
-    --text-dark: #333;
-    --text-muted: #666;
+    --primary-color: #4dabf7; /* Brighter Blue */
+    --primary-dark: #339af0;
+    --secondary-color: #adb5bd;
+    --bg-light: #f1f3f5;
+    --text-dark: #212529;
+    --text-muted: #868e96;
     --white: #ffffff;
-    --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    --shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.07), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    --border-radius: 16px;
 }
 
 body {
-    font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, Roboto, sans-serif;
+    font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
     margin: 0;
     padding: 0;
     color: var(--text-dark);
-    line-height: 1.6;
+    line-height: 1.7;
     background-color: var(--white);
-}
-
-a {
-    text-decoration: none;
-    color: inherit;
-}
-
-ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-}
-
-.container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 20px;
+    -webkit-font-smoothing: antialiased;
 }
 
 /* Header */
 header {
-    background: var(--white);
-    padding: 1rem 0;
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(10px);
+    padding: 1.2rem 0;
     position: sticky;
     top: 0;
     z-index: 1000;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-}
-
-nav {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    border-bottom: 1px solid rgba(0,0,0,0.05);
 }
 
 .logo {
-    font-size: 1.5rem;
-    font-weight: bold;
-    color: var(--primary-color);
+    font-size: 1.6rem;
+    font-weight: 800;
+    color: var(--primary-dark);
+    letter-spacing: -0.5px;
 }
 
-nav ul {
-    display: flex;
-    gap: 2rem;
+nav ul li a {
+    font-weight: 600;
+    color: var(--text-dark);
+    transition: color 0.2s;
 }
 
 nav ul li a:hover {
     color: var(--primary-color);
 }
 
-/* Footer */
-footer {
-    background: #222;
-    color: #eee;
-    padding: 3rem 0;
-    margin-top: 5rem;
-}
-
-.footer-content {
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    gap: 2rem;
-}
-
 /* Hero Section */
 .hero {
-    background-color: var(--bg-light);
-    padding: 100px 0;
+    background: linear-gradient(135deg, #e7f5ff 0%, #ffffff 100%);
+    padding: 120px 0;
     text-align: center;
 }
 
 .hero h1 {
-    font-size: 3rem;
+    font-size: 3.5rem;
+    font-weight: 900;
+    letter-spacing: -1.5px;
     margin-bottom: 1.5rem;
+    color: #1864ab;
 }
 
 .hero p {
-    font-size: 1.25rem;
-    color: var(--text-muted);
-    max-width: 800px;
-    margin: 0 auto 2rem;
+    font-size: 1.3rem;
+    font-weight: 400;
+    color: #495057;
+    max-width: 700px;
+    margin: 0 auto 2.5rem;
+}
+
+.btn-primary {
+    background: var(--primary-dark);
+    color: white;
+    padding: 1.1rem 2.5rem;
+    border-radius: 50px;
+    font-weight: 700;
+    box-shadow: 0 10px 15px -3px rgba(51, 154, 240, 0.3);
+    transition: all 0.3s;
+    display: inline-block;
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 20px 25px -5px rgba(51, 154, 240, 0.4);
 }
 
 /* Section */
-section {
-    padding: 80px 0;
-}
-
 section h2 {
-    text-align: center;
-    font-size: 2.25rem;
-    margin-bottom: 3rem;
+    font-weight: 800;
+    letter-spacing: -1px;
 }
 
 /* Cards */
-.card-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 2rem;
-}
-
 .card {
     background: var(--white);
-    padding: 2rem;
-    border-radius: 12px;
+    padding: 2.5rem;
+    border-radius: var(--border-radius);
     box-shadow: var(--shadow);
-    transition: transform 0.3s;
-}
-
-.card:hover {
-    transform: translateY(-5px);
+    border: 1px solid rgba(0,0,0,0.03);
 }
 
 /* FAQ Accordion */

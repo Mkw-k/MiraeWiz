@@ -40,15 +40,36 @@
                 <span style="color: #ffc107;" th:text="${'★'.repeat(review.rating) + '☆'.repeat(5-review.rating)}">★★★★★</span>
             </div>
             <p th:text="${review.content}" style="white-space: pre-wrap; color: var(--text-dark);">내용</p>
-            <div style="margin-top: 1.5rem; font-size: 0.85rem; color: var(--text-muted); display: flex; justify-content: space-between;">
+            <div style="margin-top: 1.5rem; font-size: 0.85rem; color: var(--text-muted); display: flex; justify-content: space-between; align-items: center;">
                 <span th:text="${#temporals.format(review.createdAt, 'yyyy.MM.dd')}">2026.06.18</span>
-                <span th:if="${review.isBest}" style="background: #e1f5fe; color: #0288d1; padding: 2px 8px; border-radius: 10px; font-weight: bold;">BEST</span>
+                <div>
+                    <span th:if="${review.isBest}" style="background: #e1f5fe; color: #0288d1; padding: 2px 8px; border-radius: 10px; font-weight: bold; margin-right: 10px;">BEST</span>
+                    <button th:onclick="'showDeleteForm(' + ${review.id} + ')'" style="background: none; border: none; color: #ff5252; cursor: pointer; font-size: 0.8rem;">삭제</button>
+                </div>
+            </div>
+            <!-- Hidden Delete Form -->
+            <div th:id="'delete-form-' + ${review.id}" style="display: none; margin-top: 1rem; padding-top: 1rem; border-top: 1px dashed #ddd;">
+                <form th:action="@{/reviews/delete}" method="post" style="display: flex; gap: 5px;">
+                    <input type="hidden" name="id" th:value="${review.id}">
+                    <input type="password" name="password" placeholder="비밀번호" required style="flex: 1; padding: 0.3rem; border: 1px solid #ddd; border-radius: 4px; font-size: 0.8rem;">
+                    <button type="submit" style="padding: 0.3rem 0.6rem; background: #666; color: white; border: none; border-radius: 4px; cursor: pointer; font-size: 0.8rem;">확인</button>
+                    <button type="button" th:onclick="'hideDeleteForm(' + ${review.id} + ')'" style="padding: 0.3rem 0.6rem; background: #eee; border: none; border-radius: 4px; cursor: pointer; font-size: 0.8rem;">취소</button>
+                </form>
             </div>
         </div>
     </div>
 </main>
 
 <footer th:replace="~{fragments :: footer}"></footer>
+
+<script>
+    function showDeleteForm(id) {
+        document.getElementById('delete-form-' + id).style.display = 'block';
+    }
+    function hideDeleteForm(id) {
+        document.getElementById('delete-form-' + id).style.display = 'none';
+    }
+</script>
 
 </body>
 </html>
