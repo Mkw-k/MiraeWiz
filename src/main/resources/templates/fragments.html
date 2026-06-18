@@ -26,19 +26,50 @@
 
 <footer th:fragment="footer">
     <div class="container">
-        <div class="footer-content">
-            <div>
-                <h3>MiraeWiz</h3>
-                <p>미래를 위즈(Wiz)하다.</p>
+        <div class="footer-top">
+            <div class="footer-company-info">
+                <h3 class="footer-logo">MiraeWiz</h3>
+                <div class="info-details">
+                    <p>상호명 : 미래위즈 | 대표 : OOO | 사업자등록번호 : 000-00-00000</p>
+                    <p>주소 : 서울특별시 강남구 OOO 123</p>
+                    <p>통신판매업신고번호 : 제 2026-서울강남-0000호 | 개인정보관리책임자 : OOO</p>
+                    <p class="customer-center">고객센터 : <strong>1588-0000</strong> (평일 09:30 ~ 18:00)</p>
+                    <p>이메일 : inquiremiraewiz@naver.com</p>
+                </div>
             </div>
-            <div>
-                <h4>Contact</h4>
-                <p>Email: inquiremiraewiz@naver.com</p>
-                <p>Address: 서울특별시 ...</p>
+            
+            <div class="footer-sitemap">
+                <div class="sitemap-col">
+                    <h4>서비스</h4>
+                    <ul>
+                        <li><a href="/programs">WW Kingdom</a></li>
+                        <li><a href="/reviews">사용후기</a></li>
+                    </ul>
+                </div>
+                <div class="sitemap-col">
+                    <h4>고객지원</h4>
+                    <ul>
+                        <li><a href="/faq">자주하는질문</a></li>
+                        <li><a href="#">1:1 문의</a></li>
+                    </ul>
+                </div>
+                <div class="sitemap-col">
+                    <h4>회사소개</h4>
+                    <ul>
+                        <li><a href="/about">미래위즈 소개</a></li>
+                    </ul>
+                </div>
             </div>
         </div>
-        <hr style="border: 0; border-top: 1px solid #444; margin: 2rem 0;">
-        <p style="text-align: center; font-size: 0.9rem;">&copy; 2026 MiraeWiz. All rights reserved.</p>
+        
+        <div class="footer-bottom">
+            <div class="legal-links">
+                <a href="#">이용약관</a>
+                <a href="#" style="font-weight: bold; color: #333;">개인정보처리방침</a>
+                <a href="#">이메일무단수집거부</a>
+            </div>
+            <p class="copyright">Copyright © 2026 MiraeWiz Inc. ALL Rights Reserved.</p>
+        </div>
     </div>
 </footer>
 

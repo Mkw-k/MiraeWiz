@@ -130,6 +130,68 @@ header {
     margin-bottom: 40px;
 }
 
+/* Carousel Styles */
+.hero-carousel-container {
+    position: relative;
+    background: #fff;
+    overflow: hidden;
+}
+
+.carousel-wrapper {
+    position: relative;
+    width: 100%;
+    min-height: 700px;
+}
+
+.carousel-slide {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.8s ease-in-out, visibility 0.8s ease-in-out;
+    padding: 80px 0 150px;
+    display: flex;
+    align-items: center;
+}
+
+.carousel-slide.active {
+    opacity: 1;
+    visibility: visible;
+    position: relative;
+}
+
+.carousel-indicators {
+    position: absolute;
+    bottom: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 15px;
+    z-index: 10;
+}
+
+.indicator {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: transparent;
+    border: 2px solid #ddd;
+    color: #999;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.indicator.active {
+    background: var(--text-orange);
+    border-color: var(--text-orange);
+    color: #fff;
+}
+
 .google-play-btn {
     display: inline-block;
     background-color: #000;
@@ -245,10 +307,141 @@ header {
 
 /* Footer */
 footer {
-    padding: 60px 0;
-    background: #fbfbfd;
-    border-top: 1px solid #d2d2d7;
-    color: #86868b;
-    font-size: 12px;
+    padding: 60px 0 30px;
+    background: #2a2c30;
+    color: #a0a0a0;
+    font-size: 13px;
+    line-height: 1.8;
+}
+
+.footer-top {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 40px;
+}
+
+.footer-company-info {
+    flex: 1;
+}
+
+.footer-logo {
+    color: #fff;
+    font-size: 24px;
+    font-weight: 800;
+    margin-bottom: 20px;
+}
+
+.info-details p {
+    margin-bottom: 5px;
+}
+
+.customer-center {
+    font-size: 16px;
+    color: #fff;
+    margin-top: 15px !important;
+}
+
+.customer-center strong {
+    font-size: 24px;
+    color: var(--primary-blue);
+}
+
+.footer-sitemap {
+    display: flex;
+    gap: 80px;
+}
+
+.sitemap-col h4 {
+    color: #fff;
+    font-size: 15px;
+    margin-bottom: 15px;
+}
+
+.sitemap-col ul li {
+    margin-bottom: 8px;
+}
+
+.sitemap-col a {
+    color: #a0a0a0;
+    transition: color 0.2s;
+}
+
+.sitemap-col a:hover {
+    color: #fff;
+}
+
+.footer-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 30px;
+    border-top: 1px solid #444;
+}
+
+.legal-links {
+    display: flex;
+    gap: 20px;
+}
+
+.legal-links a {
+    color: #ccc;
+}
+
+/* About Page (Vocatrain Reference Style) */
+.about-hero {
+    background: linear-gradient(135deg, #182848 0%, #4b6cb7 100%);
+    color: #fff;
+    text-align: center;
+    padding: 120px 0;
+}
+
+.about-hero h1 {
+    font-size: 48px;
+    font-weight: 800;
+    margin-bottom: 20px;
+}
+
+.about-hero p {
+    font-size: 20px;
+    opacity: 0.8;
+}
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    text-align: center;
+    margin-top: -50px;
+    position: relative;
+    z-index: 10;
+}
+
+.stat-card {
+    background: #fff;
+    padding: 40px 20px;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+}
+
+.stat-card h3 {
+    font-size: 36px;
+    color: var(--primary-blue);
+    font-weight: 800;
+    margin-bottom: 10px;
+}
+
+.stat-card p {
+    color: #666;
+    font-weight: 600;
+}
+
+.about-content-section {
+    padding: 100px 0;
+}
+
+.history-box {
+    border-left: 2px solid var(--primary-blue);
+    padding-left: 30px;
+    margin-left: 20px;
 }
 
