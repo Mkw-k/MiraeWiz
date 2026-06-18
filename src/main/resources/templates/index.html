@@ -8,22 +8,36 @@
 <main>
     <!-- Hero Section -->
     <section class="hero">
-        <div class="container">
+        <div class="hero-content">
             <h1 th:text="${vision.contentValue}">미래를 향한 끊임없는 도전</h1>
-            <p>교육과 기술의 결합으로 새로운 학습 경험을 제공합니다.</p>
-            <a href="/programs" class="btn btn-primary" style="background: var(--primary-color); color: white; padding: 1rem 2rem; border-radius: 30px;">프로그램 보기</a>
+            <p>교육의 가치를 기술로 실현하는 미래위즈입니다.</p>
+            <a href="/programs" class="btn-primary">프로그램 둘러보기</a>
+        </div>
+    </section>
+
+    <!-- Program Gallery -->
+    <section>
+        <div class="container">
+            <h2 class="section-title">주요 서비스 및 앱 스크린샷</h2>
+            <div class="gallery">
+                <!-- Loop through all 37 images -->
+                <div class="gallery-item" th:each="i : ${#numbers.sequence(1, 37)}">
+                    <img th:src="@{'/images/ref/' + ${#numbers.formatInteger(i, 2)} + ${i == 3 or i == 5 or i == 7 or i == 12 or i == 16 or i == 18 or i == 26 or i == 28 or i == 30 ? '.jpg' : '.png'}}" alt="Screenshot">
+                </div>
+            </div>
         </div>
     </section>
 
     <!-- Programs Summary -->
-    <section>
+    <section style="background: var(--bg-light);">
         <div class="container">
-            <h2>대표 프로그램</h2>
+            <h2 class="section-title">미래위즈 프로그램</h2>
             <div class="card-grid">
-                <div class="card" th:each="program : ${programs}">
+                <div class="card" th:each="program : ${programs}" style="text-align: center;">
+                    <img th:src="${program.iconUrl}" class="app-icon" alt="App Icon">
                     <h3 th:text="${program.title}">프로그램 제목</h3>
                     <p th:text="${program.description}">프로그램 설명</p>
-                    <a th:href="@{/programs}" style="color: var(--primary-color); font-weight: bold;">더 알아보기 &rarr;</a>
+                    <a th:href="@{/programs}" style="color: var(--primary-color); font-weight: bold;">자세히 보기 &rarr;</a>
                 </div>
             </div>
         </div>
