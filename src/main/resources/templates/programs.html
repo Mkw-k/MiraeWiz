@@ -71,23 +71,23 @@
             <!-- Horizontal Slider for Screenshots (App Store Style - 1 at a time) -->
             <h3 style="font-size: 28px; font-weight: 800; margin-bottom: 30px; text-align: center; letter-spacing: -0.5px;">미리보기</h3>
             
-            <!-- Modified Slider Container for 1-item view -->
-            <div class="slider-container" style="max-width: 400px; margin: 0 auto; background: transparent; padding: 0;">
-                <button class="slider-btn prev" onclick="moveSlide(-1)" style="left: -60px;">&#10094;</button>
+            <!-- Modified Slider Container for 1-item view with visible arrows -->
+            <div class="slider-container" style="max-width: 320px; margin: 0 auto; background: transparent; padding: 0; overflow: visible; position: relative;">
+                <button class="slider-btn prev" onclick="moveSlide(-1)" style="left: -70px;">&#10094;</button>
                 
-                <div style="overflow: hidden; border-radius: 30px; border: 10px solid #333; box-shadow: 0 20px 40px rgba(0,0,0,0.2); background: #fff;">
-                    <div class="slider-track" id="sliderTrack" style="gap: 0;">
-                        <div class="slider-item" th:each="i : ${#numbers.sequence(1, 37)}" style="min-width: 100%;">
+                <div style="overflow: hidden; border-radius: 30px; border: 10px solid #333; box-shadow: 0 20px 40px rgba(0,0,0,0.2); background: #fff; position: relative; z-index: 5;">
+                    <div class="slider-track" id="sliderTrack" style="gap: 0; display: flex; width: 100%;">
+                        <div class="slider-item" th:each="i : ${#numbers.sequence(1, 37)}" style="flex: 0 0 100%; min-width: 100%;">
                             <!-- Adjust extensions as previously mapped -->
-                            <img th:src="@{'/images/ref/' + ${#numbers.formatInteger(i, 2)} + ${(i == 3 or i == 5 or i == 7 or i == 12) ? '.jpg' : '.png'}}" alt="App Screenshot" style="border-radius: 0; box-shadow: none; display: block;">
+                            <img th:src="@{'/images/ref/' + ${#numbers.formatInteger(i, 2)} + ${(i == 3 or i == 5 or i == 7 or i == 12) ? '.jpg' : '.png'}}" alt="App Screenshot" style="border-radius: 0; box-shadow: none; display: block; width: 100%;">
                         </div>
                     </div>
                 </div>
 
-                <button class="slider-btn next" onclick="moveSlide(1)" style="right: -60px;">&#10095;</button>
+                <button class="slider-btn next" onclick="moveSlide(1)" style="right: -70px;">&#10095;</button>
             </div>
             
-            <p style="text-align: center; color: var(--text-gray); margin-top: 20px; font-size: 14px;">화살표를 눌러 화면을 넘겨보세요.</p>
+            <p style="text-align: center; color: var(--text-gray); margin-top: 20px; font-size: 14px;">화살표를 누르거나 기다리시면 자동으로 넘어갑니다.</p>
         </div>
 
     </div>
@@ -96,31 +96,47 @@
 <footer th:replace="~{fragments :: footer}"></footer>
 
 <script>
-    // Horizontal Slider Logic (App Store Style - 1 at a time)
+    // App Selection Logic
+    function selectApp(id) {
+        document.querySelectorAll('.app-selector-card').forEach(card => card.classList.remove('active'));
+        event.currentTarget.classList.add('active');
+        
+        if (id !== 1) {
+            alert('이 앱은 아직 준비 중입니다. WW Kingdom을 선택해주세요.');
+            document.querySelectorAll('.app-selector-card')[0].classList.add('active');
+            event.currentTarget.classList.remove('active');
+        }
+    }
+
+    // Horizontal Slider Logic (App Store Style - Reliable Percentage Translation)
     let currentSlideIndex = 0;
-    const itemsPerView = 1; // Show exactly 1 screenshot
     const totalItems = 37;
+    let autoSlideInterval;
 
     function moveSlide(direction) {
         const track = document.getElementById('sliderTrack');
-        const itemWidth = document.querySelector('.slider-item').offsetWidth; // gap is 0 now
-        
         currentSlideIndex += direction;
         
-        // Boundaries
-        const maxIndex = totalItems - itemsPerView;
-        if (currentSlideIndex < 0) currentSlideIndex = 0;
-        if (currentSlideIndex > maxIndex) currentSlideIndex = maxIndex;
+        // Looping Boundaries
+        if (currentSlideIndex < 0) currentSlideIndex = totalItems - 1;
+        if (currentSlideIndex >= totalItems) currentSlideIndex = 0;
         
-        track.style.transform = `translateX(-${currentSlideIndex * itemWidth}px)`;
+        // Use 100% per slide for perfect scaling
+        track.style.transform = `translateX(-${currentSlideIndex * 100}%)`;
+        
+        // Reset auto-slide timer when manually interacted
+        resetAutoSlide();
     }
     
-    // Auto resize handling
-    window.addEventListener('resize', () => {
-        const track = document.getElementById('sliderTrack');
-        track.style.transform = `translateX(0px)`;
-        currentSlideIndex = 0;
-    });
+    function resetAutoSlide() {
+        clearInterval(autoSlideInterval);
+        autoSlideInterval = setInterval(() => {
+            moveSlide(1);
+        }, 3000); // Auto slide every 3 seconds
+    }
+
+    // Start auto slide initially
+    resetAutoSlide();
 </script>
 
 </body>
