@@ -34,6 +34,7 @@ public class MainController {
 
     @GetMapping("/about")
     public String about(Model model) {
+        model.addAttribute("vision", siteContentMapper.findByKey("ABOUT_VISION"));
         model.addAttribute("greeting", siteContentMapper.findByKey("ABOUT_GREETING"));
         model.addAttribute("history", siteContentMapper.findByKey("ABOUT_HISTORY"));
         return "about";
