@@ -1,31 +1,55 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MiraeWiz - 미래위즈</title>
-    <link rel="stylesheet" th:href="@{/css/style.css}">
-</head>
+<head th:replace="~{fragments :: head}"></head>
 <body>
-    <header>
-        <nav>
-            <div class="logo">MiraeWiz</div>
-            <ul>
-                <li><a href="/">홈</a></li>
-                <li><a href="/about">회사소개</a></li>
-                <li><a href="/services">서비스</a></li>
-                <li><a href="/contact">문의하기</a></li>
-            </ul>
-        </nav>
-    </header>
 
-    <main>
-        <h1>미래위즈 홈페이지에 오신 것을 환영합니다.</h1>
-        <p>준비 중인 페이지입니다.</p>
-    </main>
+<header th:replace="~{fragments :: header}"></header>
 
-    <footer>
-        <p>&copy; 2026 MiraeWiz. All rights reserved.</p>
-    </footer>
+<main>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h1 th:text="${vision.contentValue}">미래를 향한 끊임없는 도전</h1>
+            <p>교육과 기술의 결합으로 새로운 학습 경험을 제공합니다.</p>
+            <a href="/programs" class="btn btn-primary" style="background: var(--primary-color); color: white; padding: 1rem 2rem; border-radius: 30px;">프로그램 보기</a>
+        </div>
+    </section>
+
+    <!-- Programs Summary -->
+    <section>
+        <div class="container">
+            <h2>대표 프로그램</h2>
+            <div class="card-grid">
+                <div class="card" th:each="program : ${programs}">
+                    <h3 th:text="${program.title}">프로그램 제목</h3>
+                    <p th:text="${program.description}">프로그램 설명</p>
+                    <a th:href="@{/programs}" style="color: var(--primary-color); font-weight: bold;">더 알아보기 &rarr;</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Review Highlight -->
+    <section style="background: var(--bg-light);">
+        <div class="container">
+            <h2>사용자 후기</h2>
+            <div class="card-grid">
+                <div class="card" th:each="review : ${bestReviews}">
+                    <p th:text="'&ldquo;' + ${review.content} + '&rdquo;'">후기 내용</p>
+                    <div style="margin-top: 1rem; font-weight: bold;">
+                        <span th:text="${review.author}">작성자</span>
+                        <span style="color: #ffc107;"> ★★★★★</span>
+                    </div>
+                </div>
+            </div>
+            <div style="text-align: center; margin-top: 3rem;">
+                <a href="/reviews" style="text-decoration: underline;">전체 후기 보기</a>
+            </div>
+        </div>
+    </section>
+</main>
+
+<footer th:replace="~{fragments :: footer}"></footer>
+
 </body>
 </html>

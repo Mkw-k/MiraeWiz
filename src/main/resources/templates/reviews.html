@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments :: head}"></head>
+<body>
+
+<header th:replace="~{fragments :: header}"></header>
+
+<main class="container" style="padding-top: 50px;">
+    <h2>사용 후기</h2>
+    <p style="text-align: center; color: var(--text-muted); margin-bottom: 50px;">미래위즈 서비스를 이용한 분들의 소중한 이야기입니다.</p>
+
+    <!-- Review Form -->
+    <div style="max-width: 600px; margin: 0 auto 50px; background: var(--bg-light); padding: 2rem; border-radius: 12px;">
+        <h3 style="margin-top: 0;">후기 남기기</h3>
+        <form th:action="@{/reviews/write}" method="post">
+            <div style="display: flex; gap: 10px; margin-bottom: 1rem;">
+                <input type="text" name="author" placeholder="닉네임" required style="flex: 1; padding: 0.5rem; border: 1px solid #ddd; border-radius: 4px;">
+                <input type="password" name="password" placeholder="비밀번호" required style="flex: 1; padding: 0.5rem; border: 1px solid #ddd; border-radius: 4px;">
+            </div>
+            <textarea name="content" placeholder="솔직한 후기를 남겨주세요." required style="width: 100%; height: 100px; padding: 0.5rem; border: 1px solid #ddd; border-radius: 4px; box-sizing: border-box; margin-bottom: 1rem;"></textarea>
+            <div style="margin-bottom: 1rem;">
+                <label>평점: </label>
+                <select name="rating" style="padding: 0.5rem; border: 1px solid #ddd; border-radius: 4px;">
+                    <option value="5">★★★★★</option>
+                    <option value="4">★★★★☆</option>
+                    <option value="3">★★★☆☆</option>
+                    <option value="2">★★☆☆☆</option>
+                    <option value="1">★☆☆☆☆</option>
+                </select>
+            </div>
+            <button type="submit" style="width: 100%; padding: 0.75rem; background: var(--primary-color); color: white; border: none; border-radius: 4px; cursor: pointer; font-weight: bold;">등록하기</button>
+        </form>
+    </div>
+
+    <!-- Review List -->
+    <div class="card-grid">
+        <div class="card" th:each="review : ${reviews}">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                <span th:text="${review.author}" style="font-weight: bold; font-size: 1.1rem;">작성자</span>
+                <span style="color: #ffc107;" th:text="${'★'.repeat(review.rating) + '☆'.repeat(5-review.rating)}">★★★★★</span>
+            </div>
+            <p th:text="${review.content}" style="white-space: pre-wrap; color: var(--text-dark);">내용</p>
+            <div style="margin-top: 1.5rem; font-size: 0.85rem; color: var(--text-muted); display: flex; justify-content: space-between;">
+                <span th:text="${#temporals.format(review.createdAt, 'yyyy.MM.dd')}">2026.06.18</span>
+                <span th:if="${review.isBest}" style="background: #e1f5fe; color: #0288d1; padding: 2px 8px; border-radius: 10px; font-weight: bold;">BEST</span>
+            </div>
+        </div>
+    </div>
+</main>
+
+<footer th:replace="~{fragments :: footer}"></footer>
+
+</body>
+</html>

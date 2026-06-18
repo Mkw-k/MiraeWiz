@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:fragment="head">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:text="${title != null ? title + ' - MiraeWiz' : 'MiraeWiz - 미래위즈'}">MiraeWiz</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+
+<header th:fragment="header">
+    <div class="container">
+        <nav>
+            <a href="/" class="logo">MiraeWiz</a>
+            <ul>
+                <li><a href="/">홈</a></li>
+                <li><a href="/about">회사소개</a></li>
+                <li><a href="/programs">프로그램</a></li>
+                <li><a href="/reviews">사용후기</a></li>
+                <li><a href="/faq">FAQ</a></li>
+            </ul>
+        </nav>
+    </div>
+</header>
+
+<footer th:fragment="footer">
+    <div class="container">
+        <div class="footer-content">
+            <div>
+                <h3>MiraeWiz</h3>
+                <p>미래를 위즈(Wiz)하다.</p>
+            </div>
+            <div>
+                <h4>Contact</h4>
+                <p>Email: inquiremiraewiz@naver.com</p>
+                <p>Address: 서울특별시 ...</p>
+            </div>
+        </div>
+        <hr style="border: 0; border-top: 1px solid #444; margin: 2rem 0;">
+        <p style="text-align: center; font-size: 0.9rem;">&copy; 2026 MiraeWiz. All rights reserved.</p>
+    </div>
+</footer>
+
+</body>
+</html>

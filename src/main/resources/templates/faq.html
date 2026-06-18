@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments :: head}"></head>
+<body>
+
+<header th:replace="~{fragments :: header}"></header>
+
+<main class="container" style="padding-top: 50px; max-width: 800px;">
+    <h2 style="margin-bottom: 50px;">자주하는 질문</h2>
+
+    <div class="faq-list">
+        <div class="faq-item" th:each="faq : ${faqs}">
+            <div class="faq-question">
+                <span th:text="${faq.question}">질문입니다.</span>
+                <span>▼</span>
+            </div>
+            <div class="faq-answer">
+                <p th:text="${faq.answer}">답변입니다.</p>
+            </div>
+        </div>
+    </div>
+</main>
+
+<footer th:replace="~{fragments :: footer}"></footer>
+
+<script>
+    document.querySelectorAll('.faq-question').forEach(question => {
+        question.addEventListener('click', () => {
+            const answer = question.nextElementSibling;
+            const isVisible = answer.style.display === 'block';
+            
+            // Hide all others
+            document.querySelectorAll('.faq-answer').forEach(a => a.style.display = 'none');
+            
+            // Toggle current
+            answer.style.display = isVisible ? 'none' : 'block';
+        });
+    });
+</script>
+
+</body>
+</html>

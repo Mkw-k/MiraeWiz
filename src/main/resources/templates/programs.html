@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments :: head}"></head>
+<body>
+
+<header th:replace="~{fragments :: header}"></header>
+
+<main class="container" style="padding-top: 50px;">
+    <h2>미래위즈의 프로그램</h2>
+    <p style="text-align: center; color: var(--text-muted); margin-bottom: 50px;">교육의 가치를 실현하는 미래위즈의 다양한 서비스입니다.</p>
+
+    <div class="card-grid">
+        <div class="card" th:each="program : ${programs}" style="display: flex; flex-direction: column; align-items: center; text-align: center;">
+            <div style="width: 80px; height: 80px; background: #eee; border-radius: 20px; margin-bottom: 1.5rem; display: flex; align-items: center; justify-content: center;">
+                <span style="font-size: 2rem;">📱</span>
+            </div>
+            <h3 th:text="${program.title}">앱 제목</h3>
+            <p th:text="${program.description}" style="margin-bottom: 2rem;">설명</p>
+            <div style="display: flex; gap: 10px;">
+                <a th:if="${program.googlePlayUrl}" th:href="${program.googlePlayUrl}" target="_blank" style="padding: 0.5rem 1rem; border: 1px solid #ddd; border-radius: 5px; font-size: 0.9rem;">Google Play</a>
+                <a th:if="${program.appStoreUrl}" th:href="${program.appStoreUrl}" target="_blank" style="padding: 0.5rem 1rem; border: 1px solid #ddd; border-radius: 5px; font-size: 0.9rem;">App Store</a>
+            </div>
+        </div>
+    </div>
+</main>
+
+<footer th:replace="~{fragments :: footer}"></footer>
+
+</body>
+</html>
