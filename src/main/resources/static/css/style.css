@@ -1,0 +1,254 @@
+/* 
+   MiraeWiz Modern CSS - Native Pixel-Perfect Replication
+*/
+@import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css');
+
+:root {
+    --text-black: #000000;
+    --text-orange: #ff8c00;
+    --bg-badge: #f1f3f5;
+    --text-badge: #495057;
+    --bg-white: #ffffff;
+    --transition: all 0.3s ease;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Pretendard', sans-serif;
+    background-color: var(--bg-white);
+    color: var(--text-black);
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 40px;
+}
+
+/* Header */
+header {
+    height: 120px;
+    display: flex;
+    align-items: center;
+    background: transparent;
+    position: relative;
+    z-index: 1000;
+}
+
+.header-inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.logo-wrap {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+}
+
+.nav-logo-img {
+    height: 90px;
+    width: auto;
+}
+
+.nav-list {
+    display: flex;
+    gap: 45px;
+    list-style: none;
+    margin-top: 15px;
+}
+
+.nav-list li a {
+    font-size: 16px;
+    font-weight: 500;
+    color: var(--text-black);
+    text-decoration: none;
+    transition: var(--transition);
+}
+
+.nav-list li a:hover {
+    color: var(--text-orange);
+}
+
+/* Main Hero - Exact Match */
+.hero {
+    padding: 80px 0 150px;
+    background: #fff;
+    display: flex;
+    align-items: center;
+}
+
+.hero-inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.hero-text-box {
+    flex: 1;
+    padding-right: 50px;
+    margin-top: 40px;
+}
+
+.hero-badge {
+    display: inline-block;
+    background-color: var(--bg-badge);
+    color: var(--text-badge);
+    font-size: 14px;
+    font-weight: 600;
+    padding: 6px 18px;
+    border-radius: 20px;
+    margin-bottom: 25px;
+}
+
+.hero h1 {
+    font-size: 46px;
+    font-weight: 800;
+    line-height: 1.3;
+    letter-spacing: -1px;
+    margin-bottom: 30px;
+}
+
+.hero h1 .highlight {
+    color: var(--text-orange);
+}
+
+.hero p {
+    font-size: 17px;
+    color: #333;
+    line-height: 1.6;
+    margin-bottom: 40px;
+}
+
+.google-play-btn {
+    display: inline-block;
+    background-color: #000;
+    color: #fff;
+    padding: 10px 24px;
+    border-radius: 8px;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    width: fit-content;
+    gap: 12px;
+    transition: transform 0.2s;
+}
+
+.google-play-btn:hover {
+    transform: scale(1.05);
+}
+
+.google-play-btn img {
+    height: 30px;
+}
+
+.google-play-text {
+    display: flex;
+    flex-direction: column;
+}
+
+.google-play-text span:first-child {
+    font-size: 11px;
+    line-height: 1;
+    margin-bottom: 2px;
+}
+
+.google-play-text span:last-child {
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 1;
+}
+
+/* Phone Mockup */
+.hero-mockup {
+    flex: 1;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.phone-frame {
+    width: 320px;
+    border: 12px solid #333;
+    border-radius: 40px;
+    overflow: hidden;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+    background: #fff;
+}
+
+.phone-frame img {
+    width: 100%;
+    display: block;
+}
+
+/* Feature Sections */
+.section-white { padding: 100px 0; background: #fff; }
+.section-gray { padding: 100px 0; background: var(--bg-badge); }
+
+.title-center {
+    text-align: center;
+    font-size: 40px;
+    font-weight: 700;
+    margin-bottom: 60px;
+    letter-spacing: -0.5px;
+}
+
+.app-showcase { display: flex; align-items: center; gap: 80px; }
+.app-text { flex: 1; }
+.app-visual { flex: 1; }
+.app-visual img { width: 100%; border-radius: 30px; }
+
+/* Screenshots Grid */
+.screenshot-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 20px;
+}
+
+.screenshot-item img {
+    width: 100%;
+    border-radius: 12px;
+    border: 1px solid #eee;
+}
+
+/* Cards */
+.review-card {
+    background: #fff;
+    padding: 30px;
+    border-radius: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+}
+
+.card {
+    background: var(--bg-white);
+    padding: 2.5rem;
+    border-radius: 16px;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.07);
+    border: 1px solid rgba(0,0,0,0.03);
+}
+
+.card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+}
+
+/* Footer */
+footer {
+    padding: 60px 0;
+    background: #fbfbfd;
+    border-top: 1px solid #d2d2d7;
+    color: #86868b;
+    font-size: 12px;
+}
+
