@@ -319,8 +319,8 @@ header {
 /* Footer */
 footer {
     padding: 60px 0 30px;
-    background: #e9ecef; /* Reverted to gray */
-    color: #495057;
+    background: #2a2c30;
+    color: #a0a0a0;
     font-size: 13px;
     line-height: 1.8;
 }
@@ -336,7 +336,7 @@ footer {
 }
 
 .footer-logo {
-    color: #212529; /* Dark text for gray background */
+    color: #fff;
     font-size: 24px;
     font-weight: 800;
     margin-bottom: 20px;
@@ -348,13 +348,13 @@ footer {
 
 .customer-center {
     font-size: 16px;
-    color: #212529; /* Dark text */
+    color: #fff;
     margin-top: 15px !important;
 }
 
 .customer-center strong {
     font-size: 24px;
-    color: var(--primary-blue);
+    color: #fff; /* Changed from primary-blue to match text */
 }
 
 .footer-sitemap {
@@ -363,7 +363,7 @@ footer {
 }
 
 .sitemap-col h4 {
-    color: #212529; /* Dark text */
+    color: #fff;
     font-size: 15px;
     margin-bottom: 15px;
 }
@@ -373,12 +373,12 @@ footer {
 }
 
 .sitemap-col a {
-    color: #495057; /* Dark text */
+    color: #a0a0a0;
     transition: color 0.2s;
 }
 
 .sitemap-col a:hover {
-    color: var(--primary-blue);
+    color: #fff;
 }
 
 .footer-bottom {
@@ -386,7 +386,7 @@ footer {
     justify-content: space-between;
     align-items: center;
     padding-top: 30px;
-    border-top: 1px solid #dee2e6; /* Lighter border */
+    border-top: 1px solid #444;
 }
 
 .legal-links {
@@ -395,7 +395,7 @@ footer {
 }
 
 .legal-links a {
-    color: #495057; /* Dark text */
+    color: #ccc;
 }
 
 /* About Page (Vocatrain Reference Style) */
