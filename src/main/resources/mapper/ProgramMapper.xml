@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.miraewiz.homepage.mapper.ProgramMapper">
+    <select id="findAllVisible" resultType="com.miraewiz.homepage.model.Program">
+        SELECT * FROM programs WHERE is_visible = TRUE ORDER BY display_order ASC
+    </select>
+    <insert id="insert" parameterType="com.miraewiz.homepage.model.Program">
+        INSERT INTO programs (title, description, icon_url, google_play_url, app_store_url, display_order, is_visible)
+        VALUES (#{title}, #{description}, #{iconUrl}, #{googlePlayUrl}, #{appStoreUrl}, #{displayOrder}, #{isVisible})
+    </insert>
+</mapper>
