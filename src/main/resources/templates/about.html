@@ -52,9 +52,7 @@
             <div style="flex: 1;">
                 <h3 style="font-size: 24px; margin-bottom: 30px; color: var(--primary-blue);">History</h3>
                 <div class="history-box">
-                    <p th:text="${history?.contentValue ?: '2025.01 미래위즈 설립&#10;2025.06 WW Kingdom 출시'}" style="white-space: pre-wrap; line-height: 2.5; color: #444; font-weight: 500;">
-                        2025.01 미래위즈 설립
-                        2025.06 WW Kingdom 출시
+                    <p th:utext="${#strings.replace(#strings.replace(history?.contentValue ?: '2025.01 미래위즈 설립<br>2025.06 WW Kingdom 출시', '\n', '<br>'), '\\n', '<br>')}" style="line-height: 2.5; color: #444; font-weight: 500;">
                     </p>
                 </div>
             </div>
