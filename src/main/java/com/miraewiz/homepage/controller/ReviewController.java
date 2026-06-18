@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 @RequestMapping("/reviews")
@@ -22,8 +23,15 @@ public class ReviewController {
     }
 
     @GetMapping
-    public String reviews(Model model) {
-        model.addAttribute("reviews", reviewMapper.findAllVisible());
+    public String reviews(@RequestParam(defaultValue = "1") int page, Model model) {
+        int limit = 9;
+        int offset = (page - 1) * limit;
+        int totalReviews = reviewMapper.countVisible();
+        int totalPages = (int) Math.ceil((double) totalReviews / limit);
+        
+        model.addAttribute("reviews", reviewMapper.findAllVisible(offset, limit));
+        model.addAttribute("currentPage", page);
+        model.addAttribute("totalPages", totalPages > 0 ? totalPages : 1);
         return "reviews";
     }
 
@@ -51,11 +59,6 @@ public class ReviewController {
             model.addAttribute("reviews", reviewMapper.findAllVisible(0, limit));
             model.addAttribute("currentPage", 1);
             model.addAttribute("totalPages", totalPages > 0 ? totalPages : 1);
-            return "reviews";
-        }
-    }
-}
-, reviewMapper.findAllVisible());
             return "reviews";
         }
     }
