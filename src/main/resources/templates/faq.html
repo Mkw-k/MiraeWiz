@@ -49,8 +49,13 @@
                 
                 // Close all
                 document.querySelectorAll('.faq-item').forEach(otherItem => {
+                    const otherAnswer = otherItem.querySelector('.faq-answer');
+                    if (otherItem.classList.contains('active')) {
+                        otherAnswer.style.maxHeight = otherAnswer.scrollHeight + "px"; // Fix height temporarily
+                        otherAnswer.offsetHeight; // Force reflow
+                        otherAnswer.style.maxHeight = "0px"; // Smoothly collapse
+                    }
                     otherItem.classList.remove('active');
-                    otherItem.querySelector('.faq-answer').style.maxHeight = null;
                 });
 
                 // Toggle current
@@ -78,7 +83,7 @@
                     } else {
                         item.style.display = 'none';
                         item.classList.remove('active'); // Close if hidden
-                        item.querySelector('.faq-answer').style.maxHeight = null;
+                        item.querySelector('.faq-answer').style.maxHeight = '0px';
                     }
                 });
             });
