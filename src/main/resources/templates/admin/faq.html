@@ -49,13 +49,13 @@
             <button class="btn-secondary" onclick="resetSearch()" style="height: 36px; padding: 0 16px; font-size: 0.85rem; border-radius: 4px; cursor: pointer; border: none; box-sizing: border-box; white-space: nowrap; flex-shrink: 0;">초기화</button>
         </div>
         
-        <table>
+        <table style="table-layout: fixed; width: 100%;">
             <thead>
                 <tr>
-                    <th>카테고리</th>
+                    <th style="width: 150px;">카테고리</th>
                     <th>질문 (클릭하여 답변 보기)</th>
-                    <th>순서</th>
-                    <th>관리</th>
+                    <th style="width: 80px;">순서</th>
+                    <th style="width: 100px;">관리</th>
                 </tr>
             </thead>
             <tbody id="faqTableBody">
@@ -96,8 +96,8 @@
                         const tr = document.createElement('tr');
                         tr.innerHTML = `
                             <td>${f.category}</td>
-                            <td onclick="toggleAnswer(${f.id})" style="cursor: pointer;">
-                                <strong style="text-decoration: underline;">${f.question}</strong>
+                            <td>
+                                <strong onclick="toggleAnswer(${f.id})" style="cursor: pointer; text-decoration: underline; display: inline-block;">${f.question}</strong>
                                 <div id="answer-${f.id}" style="display: none; white-space: pre-wrap; margin-top: 8px; padding-top: 8px; border-top: 1px dashed #eee; color: #555; font-weight: normal; text-decoration: none;">${f.answer}</div>
                             </td>
                             <td>${f.displayOrder}</td>
