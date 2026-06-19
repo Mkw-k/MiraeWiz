@@ -96,11 +96,9 @@
                         const tr = document.createElement('tr');
                         tr.innerHTML = `
                             <td>${f.category}</td>
-                            <td style="cursor: pointer; text-decoration: underline;" onclick="toggleAnswer(${f.id})">
-                                <strong>${f.question}</strong>
-                                <div id="answer-${f.id}" style="display: none; white-space: pre-wrap; margin-top: 8px; padding-top: 8px; border-top: 1px dashed #eee; color: #555; font-weight: normal;">
-                                    ${f.answer}
-                                </div>
+                            <td onclick="toggleAnswer(${f.id})" style="cursor: pointer;">
+                                <strong style="text-decoration: underline;">${f.question}</strong>
+                                <div id="answer-${f.id}" style="display: none; white-space: pre-wrap; margin-top: 8px; padding-top: 8px; border-top: 1px dashed #eee; color: #555; font-weight: normal; text-decoration: none;">${f.answer}</div>
                             </td>
                             <td>${f.displayOrder}</td>
                             <td>
