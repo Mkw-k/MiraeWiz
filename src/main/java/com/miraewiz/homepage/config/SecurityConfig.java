@@ -23,7 +23,7 @@ public class SecurityConfig {
             .formLogin(form -> form
                 .loginPage("/admin/login") // Hidden admin login
                 .loginProcessingUrl("/admin/login-process")
-                .defaultSuccessUrl("/admin/dashboard", true)
+                .defaultSuccessUrl("/admin/reviews", true)
                 .permitAll()
             )
             .logout(logout -> logout
