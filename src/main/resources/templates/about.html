@@ -9,8 +9,10 @@
     <!-- About Hero -->
     <section class="about-hero">
         <div class="container">
-            <h1 th:text="${vision?.contentValue ?: '미래를 향한 끊임없는 도전'}">미래를 향한 끊임없는 도전</h1>
-            <p th:text="${greeting?.contentValue ?: '안녕하세요. 미래위즈입니다. 우리는 교육의 가치를 기술로 실현합니다.'}">안녕하세요. 미래위즈입니다. 우리는 교육의 가치를 기술로 실현합니다.</p>
+            <!--<h1 th:text="${vision?.contentValue ?: '미래를 향한 끊임없는 도전'}">미래를 향한 끊임없는 도전</h1>
+            <p th:text="${greeting?.contentValue ?: '안녕하세요. 미래위즈입니다. 우리는 교육의 가치를 기술로 실현합니다.'}">안녕하세요. 미래위즈입니다. 우리는 교육의 가치를 기술로 실현합니다.</p>-->
+            <h1>미래를 향한 끊임없는 도전</h1>
+            <p>안녕하세요. 미래위즈입니다. 우리는 교육의 가치를 기술로 실현합니다.</p>
         </div>
     </section>
 
@@ -52,7 +54,9 @@
             <div style="flex: 1;">
                 <h3 style="font-size: 24px; margin-bottom: 30px; color: var(--primary-blue);">History</h3>
                 <div class="history-box">
-                    <p th:utext="${#strings.replace(#strings.replace(history?.contentValue ?: '2025.01 미래위즈 설립<br>2025.06 WW Kingdom 출시', '\n', '<br>'), '\\n', '<br>')}" style="line-height: 2.5; color: #444; font-weight: 500;">
+                    <p style="line-height: 2.5; color: #444; font-weight: 500;">
+                        2025.01 미래위즈 설립<br>
+                        2025.06 WW Kingdom 출시
                     </p>
                 </div>
             </div>

@@ -28,15 +28,11 @@ public class MainController {
     public String index(Model model) {
         model.addAttribute("programs", programMapper.findAllVisible());
         model.addAttribute("bestReviews", reviewMapper.findAllVisible(0, 3)); 
-        model.addAttribute("vision", siteContentMapper.findByKey("ABOUT_VISION"));
         return "index";
     }
 
     @GetMapping("/about")
-    public String about(Model model) {
-        model.addAttribute("vision", siteContentMapper.findByKey("ABOUT_VISION"));
-        model.addAttribute("greeting", siteContentMapper.findByKey("ABOUT_GREETING"));
-        model.addAttribute("history", siteContentMapper.findByKey("ABOUT_HISTORY"));
+    public String about() {
         return "about";
     }
 
