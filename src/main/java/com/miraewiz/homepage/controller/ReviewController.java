@@ -24,7 +24,7 @@ public class ReviewController {
 
     @GetMapping
     public String reviews(@RequestParam(defaultValue = "1") int page, Model model) {
-        int limit = 9;
+        int limit = 6;
         int offset = (page - 1) * limit;
         int totalReviews = reviewMapper.countVisible();
         int totalPages = (int) Math.ceil((double) totalReviews / limit);
@@ -53,7 +53,31 @@ public class ReviewController {
             return "redirect:/reviews";
         } else {
             model.addAttribute("error", "비밀번호가 일치하지 않습니다.");
-            int limit = 9;
+            int limit = 6;
+            int totalReviews = reviewMapper.countVisible();
+            int totalPages = (int) Math.ceil((double) totalReviews / limit);
+            model.addAttribute("reviews", reviewMapper.findAllVisible(0, limit));
+            model.addAttribute("currentPage", 1);
+            model.addAttribute("totalPages", totalPages > 0 ? totalPages : 1);
+            return "reviews";
+        }
+    }
+
+    @PostMapping("/update")
+    public String updateReview(@RequestParam Long id,
+                               @RequestParam String password,
+                               @RequestParam String content,
+                               @RequestParam Integer rating,
+                               Model model) {
+        Review review = reviewMapper.findById(id);
+        if (review != null && passwordEncoder.matches(password, review.getPassword())) {
+            review.setContent(content);
+            review.setRating(rating);
+            reviewMapper.update(review);
+            return "redirect:/reviews";
+        } else {
+            model.addAttribute("error", "비밀번호가 일치하지 않습니다.");
+            int limit = 6;
             int totalReviews = reviewMapper.countVisible();
             int totalPages = (int) Math.ceil((double) totalReviews / limit);
             model.addAttribute("reviews", reviewMapper.findAllVisible(0, limit));

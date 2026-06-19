@@ -5,7 +5,7 @@
 
 <header th:replace="~{fragments :: header}"></header>
 
-<main class="container reviews-page-wrap">
+<main class="container reviews-page-wrap" style="max-width: 1600px; width: 100%; margin: 0 auto; padding: 80px 50px 100px; box-sizing: border-box; display: flex; flex-direction: column;">
     <div style="text-align: center; margin-bottom: 50px;">
         <h2 style="font-size: 36px; font-weight: 800; letter-spacing: -1px;">사용 후기</h2>
         <p style="color: var(--text-gray); margin-top: 10px;">미래위즈 서비스를 이용한 분들의 소중한 이야기입니다.</p>
@@ -38,19 +38,42 @@
     </div>
 
     <!-- Review List -->
-    <div class="card-grid">
-        <div class="review-card" th:each="review : ${reviews}">
-            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+    <div class="card-grid" style="display: grid; grid-template-columns: 650px 650px; gap: 2rem; justify-content: center; width: 100%; box-sizing: border-box;">
+        <div class="review-card" th:each="review : ${reviews}" style="width: 650px; min-width: 650px; max-width: 650px; height: 320px; min-height: 320px; max-height: 320px; box-sizing: border-box; display: flex; flex-direction: column; background: #fff; padding: 30px; border-radius: 20px; box-shadow: 0 4px 12px rgba(0,0,0,0.05); flex-shrink: 0;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
                 <span th:text="${review.author}" style="font-weight: bold; font-size: 1.1rem;">작성자</span>
                 <span style="color: #ffc107; font-size: 18px;" th:text="${'★'.repeat(review.rating) + '☆'.repeat(5-review.rating)}">★★★★★</span>
             </div>
-            <p th:text="${review.content}" style="white-space: pre-wrap; color: var(--text-dark); line-height: 1.6; flex: 1;">내용</p>
+            <p th:text="${review.content}" style="white-space: pre-wrap; color: var(--text-dark); line-height: 1.6; flex: 1; margin: 0 0 1.5rem 0; overflow-y: auto; width: 100%; word-break: break-all;">내용</p>
             <div style="margin-top: auto; padding-top: 1.5rem; font-size: 0.85rem; color: var(--text-gray); display: flex; justify-content: space-between; align-items: center;">
                 <span th:text="${#temporals.format(review.createdAt, 'yyyy.MM.dd')}">2026.06.18</span>
                 <div>
                     <span th:if="${review.isBest}" style="background: #e1f5fe; color: #0288d1; padding: 4px 10px; border-radius: 12px; font-weight: bold; margin-right: 10px;">BEST</span>
+                    <button th:onclick="'showEditForm(' + ${review.id} + ')'" style="background: none; border: none; color: #1890ff; cursor: pointer; font-size: 0.8rem; font-weight: 600; margin-right: 10px;">수정</button>
                     <button th:onclick="'showDeleteForm(' + ${review.id} + ')'" style="background: none; border: none; color: #ff5252; cursor: pointer; font-size: 0.8rem; font-weight: 600;">삭제</button>
                 </div>
+            </div>
+            <!-- Hidden Edit Form -->
+            <div th:id="'edit-form-' + ${review.id}" style="display: none; margin-top: 1rem; padding-top: 1rem; border-top: 1px dashed #ddd;">
+                <form th:action="@{/reviews/update}" method="post">
+                    <input type="hidden" name="id" th:value="${review.id}">
+                    <div style="margin-bottom: 0.5rem; display: flex; align-items: center; gap: 10px;">
+                        <label style="font-size: 0.8rem; font-weight: 600;">평점: </label>
+                        <select name="rating" style="padding: 0.3rem; border: 1px solid #ddd; border-radius: 4px; font-size: 0.8rem;">
+                            <option value="5" th:selected="${review.rating == 5}">★★★★★</option>
+                            <option value="4" th:selected="${review.rating == 4}">★★★★☆</option>
+                            <option value="3" th:selected="${review.rating == 3}">★★★☆☆</option>
+                            <option value="2" th:selected="${review.rating == 2}">★★☆☆☆</option>
+                            <option value="1" th:selected="${review.rating == 1}">★☆☆☆☆</option>
+                        </select>
+                    </div>
+                    <textarea name="content" required style="width: 100%; height: 80px; padding: 0.4rem; border: 1px solid #ddd; border-radius: 4px; box-sizing: border-box; margin-bottom: 0.5rem; resize: vertical; font-size: 0.85rem;" th:text="${review.content}"></textarea>
+                    <div style="display: flex; gap: 8px; align-items: center;">
+                        <input type="password" name="password" placeholder="비밀번호" required style="flex: 1; height: 36px; padding: 0 12px; border: 1px solid #ddd; border-radius: 8px; font-size: 0.85rem; box-sizing: border-box; margin: 0;">
+                        <button type="submit" style="height: 36px; padding: 0 16px; background: var(--text-black); color: white; border: none; border-radius: 8px; cursor: pointer; font-size: 0.85rem; font-weight: bold; white-space: nowrap; flex-shrink: 0; box-sizing: border-box;">수정 완료</button>
+                        <button type="button" th:onclick="'hideEditForm(' + ${review.id} + ')'" style="height: 36px; padding: 0 16px; background: #eee; border: none; border-radius: 8px; cursor: pointer; font-size: 0.85rem; color: #333; font-weight: bold; white-space: nowrap; flex-shrink: 0; box-sizing: border-box;">취소</button>
+                    </div>
+                </form>
             </div>
             <!-- Hidden Delete Form -->
             <div th:id="'delete-form-' + ${review.id}" style="display: none; margin-top: 1rem; padding-top: 1rem; border-top: 1px dashed #ddd;">
@@ -74,11 +97,43 @@
 <footer th:replace="~{fragments :: footer}"></footer>
 
 <script>
+    function showEditForm(id) {
+        hideDeleteForm(id);
+        const form = document.getElementById('edit-form-' + id);
+        const card = form.closest('.review-card');
+        if (card) {
+            card.style.height = 'auto';
+            card.style.maxHeight = 'none';
+        }
+        form.style.display = 'block';
+    }
+    function hideEditForm(id) {
+        const form = document.getElementById('edit-form-' + id);
+        const card = form.closest('.review-card');
+        if (card) {
+            card.style.height = '320px';
+            card.style.maxHeight = '320px';
+        }
+        form.style.display = 'none';
+    }
     function showDeleteForm(id) {
-        document.getElementById('delete-form-' + id).style.display = 'block';
+        hideEditForm(id);
+        const form = document.getElementById('delete-form-' + id);
+        const card = form.closest('.review-card');
+        if (card) {
+            card.style.height = 'auto';
+            card.style.maxHeight = 'none';
+        }
+        form.style.display = 'block';
     }
     function hideDeleteForm(id) {
-        document.getElementById('delete-form-' + id).style.display = 'none';
+        const form = document.getElementById('delete-form-' + id);
+        const card = form.closest('.review-card');
+        if (card) {
+            card.style.height = '320px';
+            card.style.maxHeight = '320px';
+        }
+        form.style.display = 'none';
     }
 </script>
 

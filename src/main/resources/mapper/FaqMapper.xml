@@ -4,6 +4,28 @@
     <select id="findAll" resultType="com.miraewiz.homepage.model.Faq">
         SELECT * FROM faqs ORDER BY display_order ASC
     </select>
+    <select id="findAllAdmin" resultType="com.miraewiz.homepage.model.Faq">
+        SELECT * FROM faqs
+        <where>
+            <if test="search != null and search != ''">
+                category LIKE CONCAT('%', #{search}, '%')
+                OR question LIKE CONCAT('%', #{search}, '%')
+                OR answer LIKE CONCAT('%', #{search}, '%')
+            </if>
+        </where>
+        ORDER BY display_order ASC
+        LIMIT #{limit} OFFSET #{offset}
+    </select>
+    <select id="countAllAdmin" resultType="int">
+        SELECT COUNT(*) FROM faqs
+        <where>
+            <if test="search != null and search != ''">
+                category LIKE CONCAT('%', #{search}, '%')
+                OR question LIKE CONCAT('%', #{search}, '%')
+                OR answer LIKE CONCAT('%', #{search}, '%')
+            </if>
+        </where>
+    </select>
     <select id="findById" resultType="com.miraewiz.homepage.model.Faq">
         SELECT * FROM faqs WHERE id = #{id}
     </select>

@@ -6,6 +6,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
+import java.util.HashMap;
 
 @RestController
 @RequestMapping("/api/admin/reviews")
@@ -18,8 +20,22 @@ public class AdminReviewApiController {
     }
 
     @GetMapping
-    public List<Review> getReviews() {
-        return reviewMapper.findAll();
+    public ResponseEntity<Map<String, Object>> getReviews(
+            @RequestParam(required = false) String search,
+            @RequestParam(defaultValue = "1") int page,
+            @RequestParam(defaultValue = "10") int size) {
+        int offset = (page - 1) * size;
+        List<Review> reviews = reviewMapper.findAllAdmin(search, offset, size);
+        int totalElements = reviewMapper.countAllAdmin(search);
+        int totalPages = (int) Math.ceil((double) totalElements / size);
+
+        Map<String, Object> response = new HashMap<>();
+        response.put("content", reviews);
+        response.put("totalElements", totalElements);
+        response.put("totalPages", totalPages > 0 ? totalPages : 1);
+        response.put("currentPage", page);
+
+        return ResponseEntity.ok(response);
     }
 
     @PatchMapping("/{id}/visibility")

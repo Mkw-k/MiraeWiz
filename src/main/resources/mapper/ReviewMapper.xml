@@ -4,6 +4,26 @@
     <select id="findAll" resultType="com.miraewiz.homepage.model.Review">
         SELECT * FROM reviews ORDER BY created_at DESC
     </select>
+    <select id="findAllAdmin" resultType="com.miraewiz.homepage.model.Review">
+        SELECT * FROM reviews
+        <where>
+            <if test="search != null and search != ''">
+                author LIKE CONCAT('%', #{search}, '%')
+                OR content LIKE CONCAT('%', #{search}, '%')
+            </if>
+        </where>
+        ORDER BY created_at DESC
+        LIMIT #{limit} OFFSET #{offset}
+    </select>
+    <select id="countAllAdmin" resultType="int">
+        SELECT COUNT(*) FROM reviews
+        <where>
+            <if test="search != null and search != ''">
+                author LIKE CONCAT('%', #{search}, '%')
+                OR content LIKE CONCAT('%', #{search}, '%')
+            </if>
+        </where>
+    </select>
     <select id="findAllVisible" resultType="com.miraewiz.homepage.model.Review">
         SELECT * FROM reviews WHERE is_visible = TRUE ORDER BY created_at DESC LIMIT #{limit} OFFSET #{offset}
     </select>

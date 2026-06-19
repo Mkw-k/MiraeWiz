@@ -42,6 +42,12 @@
         <div class="header">
             <h1>사용후기 관리</h1>
         </div>
+
+        <div style="margin-bottom: 1.5rem; display: flex; gap: 10px; align-items: center;">
+            <input type="text" id="searchInput" placeholder="작성자 또는 내용 검색" style="width: 250px; height: 36px; padding: 0 12px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box; margin: 0;">
+            <button class="btn-toggle" onclick="searchReviews()" style="background: #333; color: white; height: 36px; padding: 0 16px; font-size: 0.85rem; border-radius: 4px; cursor: pointer; border: none; box-sizing: border-box; white-space: nowrap; flex-shrink: 0;">검색</button>
+            <button class="btn-secondary" onclick="resetSearch()" style="height: 36px; padding: 0 16px; font-size: 0.85rem; border-radius: 4px; cursor: pointer; border: none; box-sizing: border-box; white-space: nowrap; flex-shrink: 0;">초기화</button>
+        </div>
         
         <table>
             <thead>
@@ -59,23 +65,34 @@
                 <!-- Data injected by JS -->
             </tbody>
         </table>
+
+        <div id="pagination" style="display: flex; gap: 8px; margin-top: 1.5rem; justify-content: center;"></div>
     </div>
 
     <script>
-        document.addEventListener('DOMContentLoaded', loadReviews);
+        const state = {
+            currentPage: 1,
+            search: ''
+        };
+
+        document.addEventListener('DOMContentLoaded', () => loadReviews());
 
         function loadReviews() {
-            fetch('/api/admin/reviews')
+            const url = `/api/admin/reviews?page=${state.currentPage}&search=${encodeURIComponent(state.search)}`;
+            fetch(url)
                 .then(res => res.json())
                 .then(data => {
                     const tbody = document.getElementById('reviewTableBody');
                     tbody.innerHTML = '';
-                    data.forEach(r => {
+                    data.content.forEach(r => {
                         const tr = document.createElement('tr');
                         tr.innerHTML = `
                             <td>${r.id}</td>
                             <td>${r.author}</td>
-                            <td style="max-width: 300px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">${r.content}</td>
+                            <td style="max-width: 300px; cursor: pointer; text-decoration: underline;" onclick="toggleContent(${r.id})">
+                                <span id="summary-${r.id}" style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis; display: block;">${r.content}</span>
+                                <span id="detail-${r.id}" style="display: none; white-space: pre-wrap; word-break: break-all;">${r.content}</span>
+                            </td>
                             <td>${r.rating}</td>
                             <td>${new Date(r.createdAt).toLocaleDateString()}</td>
                             <td>${r.isVisible ? '<span style="color:green">공개</span>' : '<span style="color:red">숨김</span>'}</td>
@@ -86,7 +103,58 @@
                         `;
                         tbody.appendChild(tr);
                     });
+                    renderPagination(data.totalPages, data.currentPage);
                 });
+        }
+
+        function toggleContent(id) {
+            const summary = document.getElementById('summary-' + id);
+            const detail = document.getElementById('detail-' + id);
+            if (summary.style.display === 'none') {
+                summary.style.display = 'block';
+                detail.style.display = 'none';
+            } else {
+                summary.style.display = 'none';
+                detail.style.display = 'block';
+            }
+        }
+
+        function renderPagination(totalPages, currentPage) {
+            const pagination = document.getElementById('pagination');
+            pagination.innerHTML = '';
+            for (let i = 1; i <= totalPages; i++) {
+                const btn = document.createElement('button');
+                btn.innerText = i;
+                btn.style.padding = '6px 12px';
+                btn.style.border = '1px solid #ccc';
+                btn.style.borderRadius = '4px';
+                btn.style.cursor = 'pointer';
+                if (i === currentPage) {
+                    btn.style.background = '#333';
+                    btn.style.color = 'white';
+                } else {
+                    btn.style.background = 'white';
+                    btn.style.color = '#333';
+                }
+                btn.onclick = () => {
+                    state.currentPage = i;
+                    loadReviews();
+                };
+                pagination.appendChild(btn);
+            }
+        }
+
+        function searchReviews() {
+            state.search = document.getElementById('searchInput').value;
+            state.currentPage = 1;
+            loadReviews();
+        }
+
+        function resetSearch() {
+            document.getElementById('searchInput').value = '';
+            state.search = '';
+            state.currentPage = 1;
+            loadReviews();
         }
 
         function toggleVisibility(id, isVisible) {

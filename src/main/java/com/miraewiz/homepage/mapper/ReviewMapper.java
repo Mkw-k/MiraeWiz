@@ -8,6 +8,8 @@ import java.util.List;
 @Mapper
 public interface ReviewMapper {
     List<Review> findAll();
+    List<Review> findAllAdmin(@Param("search") String search, @Param("offset") int offset, @Param("limit") int limit);
+    int countAllAdmin(@Param("search") String search);
     List<Review> findAllVisible(@Param("offset") int offset, @Param("limit") int limit);
     int countVisible();
     Review findById(Long id);

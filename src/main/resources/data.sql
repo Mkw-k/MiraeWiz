@@ -28,4 +28,12 @@ INSERT INTO faqs (question, answer, category, display_order) VALUES
 INSERT INTO reviews (author, password, content, rating, is_best) VALUES 
 ('우등생A', '$2a$10$NfzRMcPpTNggbiNHALCSCOuZhIxOKZ3dm6E5lhqC/7VkE4DN4Ei/C', '진짜 게임하는 것 같아서 시간 가는 줄 모르고 공부했어요. 중학 필수 단어가 다 있어서 너무 좋아요!', 5, TRUE),
 ('학부모님', '$2a$10$NfzRMcPpTNggbiNHALCSCOuZhIxOKZ3dm6E5lhqC/7VkE4DN4Ei/C', '아이가 영단어 외우는 걸 너무 싫어했는데 이 앱은 스스로 켜서 하네요. 감사합니다.', 5, TRUE),
-('열공이', '$2a$10$NfzRMcPpTNggbiNHALCSCOuZhIxOKZ3dm6E5lhqC/7VkE4DN4Ei/C', '디자인이 깔끔하고 리스닝까지 같이 할 수 있어서 편해요.', 4, FALSE);
+('열공이', '$2a$10$NfzRMcPpTNggbiNHALCSCOuZhIxOKZ3dm6E5lhqC/7VkE4DN4Ei/C', '디자인이 깔끔하고 리스닝까지 같이 할 수 있어서 편해요.', 4, FALSE),
+('111', '$2a$10$mzjEXXJI67u6DPl0cINAwuIUlAWABvh2/18UyvaQG0Uye9uGHwpZq', '11', 5, FALSE),
+('222', '$2a$10$mzjEXXJI67u6DPl0cINAwuIUlAWABvh2/18UyvaQG0Uye9uGHwpZq', '22', 5, FALSE),
+('333', '$2a$10$mzjEXXJI67u6DPl0cINAwuIUlAWABvh2/18UyvaQG0Uye9uGHwpZq', '33', 5, FALSE),
+('444', '$2a$10$mzjEXXJI67u6DPl0cINAwuIUlAWABvh2/18UyvaQG0Uye9uGHwpZq', '44', 5, FALSE),
+('555', '$2a$10$mzjEXXJI67u6DPl0cINAwuIUlAWABvh2/18UyvaQG0Uye9uGHwpZq', '55', 5, FALSE),
+('666', '$2a$10$mzjEXXJI67u6DPl0cINAwuIUlAWABvh2/18UyvaQG0Uye9uGHwpZq', '66', 5, FALSE),
+('777', '$2a$10$mzjEXXJI67u6DPl0cINAwuIUlAWABvh2/18UyvaQG0Uye9uGHwpZq', '77', 5, FALSE),
+('888', '$2a$10$mzjEXXJI67u6DPl0cINAwuIUlAWABvh2/18UyvaQG0Uye9uGHwpZq', '88', 5, FALSE);
