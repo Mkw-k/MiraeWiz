@@ -21,11 +21,11 @@
 
 html {
     scrollbar-gutter: stable;
+    overflow-y: scroll;
 }
 
 html, body {
-    height: 100%;
-    overflow-y: scroll;
+    min-height: 100%;
 }
 
 body {
