@@ -315,6 +315,7 @@ header {
     display: flex;
     flex-direction: column;
     height: 320px;
+    width: 100%;
     box-sizing: border-box;
 }
 
@@ -1177,6 +1178,7 @@ footer {
         justify-items: center;
     }
     .review-card {
+        width: 100%;
         max-width: 650px;
     }
 }
