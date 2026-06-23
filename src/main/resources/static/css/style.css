@@ -1351,7 +1351,8 @@ footer {
 
     /* Program Slider Mobile Adjustments (Overlaying Arrows Inside Screen to Prevent Overflow) */
     .program-slider-container {
-        max-width: 280px;
+        width: 75%;
+        max-width: 320px;
     }
     .program-slider-container .slider-btn.prev {
         left: 10px;
@@ -1449,7 +1450,8 @@ footer {
         padding: 15px;
     }
     .program-slider-container {
-        max-width: 240px;
+        width: 80%;
+        max-width: 280px;
     }
     .program-slider-container .slider-btn.prev {
         left: 10px;
