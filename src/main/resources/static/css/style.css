@@ -226,6 +226,8 @@ header {
     display: flex;
     align-items: center;
     width: fit-content;
+    max-width: 100%;
+    box-sizing: border-box;
     gap: 12px;
     transition: transform 0.2s;
 }
@@ -1057,6 +1059,8 @@ footer {
     letter-spacing: -1px;
     margin-bottom: 20px;
     line-height: 1.2;
+    overflow-wrap: break-word;
+    word-break: break-word;
 }
 .program-title .highlight {
     color: var(--text-orange);
@@ -1224,8 +1228,10 @@ footer {
         text-align: center;
     }
     .program-title {
-        font-size: 32px;
+        font-size: 28px;
         text-align: center;
+        overflow-wrap: break-word;
+        word-break: break-word;
     }
     .program-features-list {
         text-align: left;
@@ -1398,8 +1404,10 @@ footer {
         text-align: center;
     }
     .program-title {
-        font-size: 28px;
+        font-size: 22px;
         text-align: center;
+        overflow-wrap: break-word;
+        word-break: break-word;
     }
     .program-features-list {
         text-align: left;
