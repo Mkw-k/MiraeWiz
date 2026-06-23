@@ -808,10 +808,12 @@ footer {
 /* Review Grid & Card Customization */
 .review-grid {
     display: grid;
-    grid-template-columns: repeat(2, 650px);
+    grid-template-columns: repeat(2, 1fr);
     gap: 2rem;
     justify-content: center;
     width: 100%;
+    max-width: 1332px;
+    margin: 0 auto;
     box-sizing: border-box;
 }
 .card-header {
@@ -1313,6 +1315,8 @@ footer {
         z-index: 1500;
         padding: 100px 0 30px;
         box-sizing: border-box;
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
     }
     .nav-wrap.active {
         right: 0;
