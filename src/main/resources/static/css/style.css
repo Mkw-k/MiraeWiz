@@ -1073,6 +1073,50 @@ footer {
     color: #fff;
 }
 
+/* Program Page Image Slider (App Store Mockup Style) */
+.program-slider-container {
+    width: 100%;
+    max-width: 320px;
+    margin: 0 auto;
+    background: transparent;
+    padding: 0;
+    position: relative;
+}
+.program-slider-frame {
+    overflow: hidden;
+    border-radius: 30px;
+    border: 10px solid #333;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+    background: #fafafa;
+    position: relative;
+    z-index: 5;
+    aspect-ratio: 9/19;
+    display: flex;
+}
+.program-slider-frame .slider-item {
+    min-width: 100%;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #fff;
+}
+.program-slider-frame .slider-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    border-radius: 0;
+    box-shadow: none;
+    display: block;
+}
+.program-slider-container .slider-btn.prev {
+    left: -70px;
+}
+.program-slider-container .slider-btn.next {
+    right: -70px;
+}
+
 /* ==========================================================================
    Responsive Design & Media Queries
    ========================================================================== */
@@ -1185,7 +1229,7 @@ footer {
         box-shadow: -10px 0 30px rgba(0, 0, 0, 0.1);
         transition: right 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         z-index: 1500;
-        padding: 100px 30px;
+        padding: 100px 0 30px;
         box-sizing: border-box;
     }
     .nav-wrap.active {
@@ -1193,12 +1237,26 @@ footer {
     }
     .nav-list {
         flex-direction: column;
-        gap: 25px;
+        gap: 10px;
         margin-top: 0;
+        width: 100%;
+        padding: 0;
+    }
+    .nav-list li {
+        width: 100%;
     }
     .nav-list li a {
+        display: block;
+        width: 100%;
+        padding: 15px 40px;
         font-size: 20px;
         font-weight: 700;
+        box-sizing: border-box;
+        transition: all 0.2s ease;
+    }
+    .nav-list li a:hover, .nav-list li a:active {
+        background: #f8f9fa;
+        color: var(--text-orange);
     }
 
     /* Hero Section Mobile Stack */
@@ -1286,6 +1344,23 @@ footer {
         width: 100%;
     }
 
+    /* Program Slider Mobile Adjustments */
+    .program-slider-container {
+        max-width: 260px;
+    }
+    .program-slider-container .slider-btn.prev {
+        left: -45px;
+        width: 40px;
+        height: 40px;
+        font-size: 18px;
+    }
+    .program-slider-container .slider-btn.next {
+        right: -45px;
+        width: 40px;
+        height: 40px;
+        font-size: 18px;
+    }
+
     /* FAQ Details Compaction */
     .faq-title {
         font-size: 30px;
@@ -1368,10 +1443,19 @@ footer {
         min-width: 180px;
         padding: 15px;
     }
-    .slider-btn.prev {
-        left: 10px !important;
+    .program-slider-container {
+        max-width: 220px;
     }
-    .slider-btn.next {
-        right: 10px !important;
+    .program-slider-container .slider-btn.prev {
+        left: -40px;
+        width: 35px;
+        height: 35px;
+        font-size: 16px;
+    }
+    .program-slider-container .slider-btn.next {
+        right: -40px;
+        width: 35px;
+        height: 35px;
+        font-size: 16px;
     }
 }

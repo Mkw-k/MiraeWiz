@@ -71,20 +71,20 @@
             <!-- Horizontal Slider for Screenshots (App Store Style - 1 at a time) -->
             <h3 style="font-size: 28px; font-weight: 800; margin-bottom: 30px; text-align: center; letter-spacing: -0.5px;">미리보기</h3>
             
-            <!-- Modified Slider Container for 1-item view with visible arrows -->
-            <div class="slider-container" style="max-width: 320px; margin: 0 auto; background: transparent; padding: 0; overflow: visible; position: relative;">
-                <button class="slider-btn prev" onclick="moveSlide(-1)" style="left: -70px;">&#10094;</button>
+            <!-- Responsive Slider Container -->
+            <div class="program-slider-container">
+                <button class="slider-btn prev" onclick="moveSlide(-1)">&#10094;</button>
                 
-                <div style="overflow: hidden; border-radius: 30px; border: 10px solid #333; box-shadow: 0 20px 40px rgba(0,0,0,0.2); background: #fafafa; position: relative; z-index: 5; aspect-ratio: 9/19; display: flex;">
-                    <div class="slider-track" id="sliderTrack" style="gap: 0; display: flex; width: 100%; height: 100%;">
-                        <div class="slider-item" th:each="i : ${#numbers.sequence(1, 37)}" style="flex: 0 0 100%; min-width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; background: #fff;">
+                <div class="program-slider-frame">
+                    <div class="slider-track" id="sliderTrack">
+                        <div class="slider-item" th:each="i : ${#numbers.sequence(1, 37)}">
                             <!-- Adjust extensions as previously mapped -->
-                            <img th:src="@{'/images/ref/' + ${#numbers.formatInteger(i, 2)} + ${(i == 3 or i == 5 or i == 7 or i == 12) ? '.jpg' : '.png'}}" alt="App Screenshot" style="width: 100%; height: 100%; object-fit: contain; border-radius: 0; box-shadow: none; display: block;">
+                            <img th:src="@{'/images/ref/' + ${#numbers.formatInteger(i, 2)} + ${(i == 3 or i == 5 or i == 7 or i == 12) ? '.jpg' : '.png'}}" alt="App Screenshot">
                         </div>
                     </div>
                 </div>
 
-                <button class="slider-btn next" onclick="moveSlide(1)" style="right: -70px;">&#10095;</button>
+                <button class="slider-btn next" onclick="moveSlide(1)">&#10095;</button>
             </div>
             
             <p style="text-align: center; color: var(--text-gray); margin-top: 20px; font-size: 14px;">화살표를 누르거나 기다리시면 자동으로 넘어갑니다.</p>
