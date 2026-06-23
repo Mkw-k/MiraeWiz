@@ -1074,6 +1074,11 @@ footer {
     align-items: flex-start;
     gap: 10px;
     word-break: keep-all;
+    width: 100%;
+}
+.program-feature-item span:last-child {
+    flex: 1;
+    min-width: 0;
 }
 .program-feature-item .check-icon {
     color: var(--primary-blue);
@@ -1194,6 +1199,39 @@ footer {
     .app-selector-card {
         min-width: 200px;
         padding: 15px;
+    }
+
+    /* Program Details Tablet Stack */
+    .program-showcase-box {
+        flex-direction: column;
+        padding: 40px 30px;
+        gap: 30px;
+        border-radius: 20px;
+    }
+    .program-visual-wrap {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+    }
+    .program-app-icon {
+        max-width: 220px;
+    }
+    .program-text-wrap {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+    .program-title {
+        font-size: 32px;
+        text-align: center;
+    }
+    .program-features-list {
+        text-align: left;
+        align-self: center;
+        width: 100%;
+        max-width: 500px;
     }
 }
 
