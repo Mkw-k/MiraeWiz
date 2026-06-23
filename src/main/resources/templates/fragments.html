@@ -13,7 +13,12 @@
         <a href="/" class="logo-wrap">
             <img src="/images/logo_placeholder.png" alt="Logo" class="nav-logo-img">
         </a>
-        <nav>
+        <button class="menu-toggle-btn" aria-label="메뉴 토글" id="menuToggleBtn">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+        </button>
+        <nav class="nav-wrap">
             <ul class="nav-list">
                 <li><a href="/about">회사소개</a></li>
                 <li><a href="/programs">프로그램</a></li>
@@ -22,6 +27,19 @@
             </ul>
         </nav>
     </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const toggleBtn = document.getElementById('menuToggleBtn');
+            const navWrap = document.querySelector('.nav-wrap');
+            if (toggleBtn && navWrap) {
+                toggleBtn.addEventListener('click', () => {
+                    toggleBtn.classList.toggle('active');
+                    navWrap.classList.toggle('active');
+                    document.body.classList.toggle('no-scroll');
+                });
+            }
+        });
+    </script>
 </header>
 
 <footer th:fragment="footer">
