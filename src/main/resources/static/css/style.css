@@ -471,7 +471,7 @@ footer {
 }
 
 .about-content-section {
-    padding: 100px 0;
+    padding: 100px 0 140px;
 }
 
 .history-box {
@@ -1308,6 +1308,9 @@ footer {
         flex-direction: column;
         gap: 50px;
     }
+    .about-content-section {
+        padding: 60px 0 100px;
+    }
     .about-story-title {
         font-size: 28px;
     }
@@ -1346,18 +1349,18 @@ footer {
         width: 100%;
     }
 
-    /* Program Slider Mobile Adjustments */
+    /* Program Slider Mobile Adjustments (Overlaying Arrows Inside Screen to Prevent Overflow) */
     .program-slider-container {
-        max-width: 260px;
+        max-width: 280px;
     }
     .program-slider-container .slider-btn.prev {
-        left: -45px;
+        left: 10px;
         width: 40px;
         height: 40px;
         font-size: 18px;
     }
     .program-slider-container .slider-btn.next {
-        right: -45px;
+        right: 10px;
         width: 40px;
         height: 40px;
         font-size: 18px;
@@ -1446,16 +1449,16 @@ footer {
         padding: 15px;
     }
     .program-slider-container {
-        max-width: 220px;
+        max-width: 240px;
     }
     .program-slider-container .slider-btn.prev {
-        left: -40px;
+        left: 10px;
         width: 35px;
         height: 35px;
         font-size: 16px;
     }
     .program-slider-container .slider-btn.next {
-        right: -40px;
+        right: 10px;
         width: 35px;
         height: 35px;
         font-size: 16px;
