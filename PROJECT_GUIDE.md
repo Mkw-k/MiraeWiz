@@ -169,7 +169,10 @@ spring.datasource.password=your_password
 
 ## 7. API 명세서 (API Specification)
 
-본 프로젝트는 관리자 대시보드에서 각 콘텐츠를 CRUD 하기 위해 REST API를 제공합니다.
+### 🌐 Spring REST Docs (Asciidoctor) API 명세서 웹 접속
+본 프로젝트는 JUnit 테스트(`AdminApiDocsTest.java`) 수행을 통해 생성되는 MockMvc 스니펫을 취합하여 Asciidoctor로 API 문서를 자동 생성합니다.
+*   **API 명세서 접속 URL:** `http://localhost:8080/docs/api-guide.html` (서버 구동 후 웹 브라우저에서 실제 요청/응답 데이터 양식 및 예제를 미려한 디자인으로 확인하실 수 있습니다.)
+*   **자동 생성 프로세스:** 빌드 시 `src/main/asciidoc/api-guide.adoc` 템플릿에 스니펫이 삽입되어 `target/generated-docs/api-guide.html`이 생성되고, `maven-resources-plugin` 설정에 따라 빌드 파일의 `static/docs/` 디렉토리에 복사되어 패키징에 자동 포함됩니다.
 
 ### 7.1. FAQ 관리 API (`/api/admin/faqs`)
 *   **전체 조회 (GET):** `GET /api/admin/faqs?search={검색어}&page={페이지번호}&size={크기}`
