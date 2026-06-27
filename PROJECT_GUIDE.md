@@ -48,8 +48,18 @@ mvn spring-boot:run
 빌드가 완료되면 `target/` 폴더 내에 `homepage-0.0.1-SNAPSHOT.jar` 파일이 생성됩니다.
 
 ```bash
-# 2. 생성된 JAR 파일을 운영 프로필(prod)로 실행
-java -jar target/homepage-0.0.1-SNAPSHOT.jar --spring.profiles.active=prod
+# 2. 생성된 JAR 파일을 운영 프로필(prod)로 백그라운드 구동 (nohup 사용)
+nohup java -jar target/homepage-0.0.1-SNAPSHOT.jar --spring.profiles.active=prod > nohup.out 2>&1 &
+
+# 3. 구동 상태 확인 (로그 모니터링)
+tail -f nohup.out
+
+# 4. 백그라운드 프로세스 종료 방법
+# (1) 실행 중인 프로세스 ID(PID) 확인
+ps -ef | grep homepage-0.0.1-SNAPSHOT.jar
+
+# (2) 확인된 PID를 이용해 프로세스 안전 종료 (예: PID가 1234인 경우)
+kill -15 1234
 ```
 
 ---
